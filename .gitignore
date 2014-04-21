@@ -1,0 +1,28 @@
+########### git ignore for django website chalet-djan-e-glyamo.eu ###########
+
+#unecessary files
+*pyc
+*~
+*.swp
+*.pid
+.directory
+
+#python files
+settings.py
+settings_server.py
+settings_at_home.py
+
+#user-uploaded content
+media/imagesNouvelles/*
+media/imagesSections/*
+
+#databases
+*.sql
+
+#collected static file
+static_collected/*
+
+
+#notes : 
+# Il est possible d'ignorer les répertoires et les fichiers d'un répertoire.
+#tmp/**/* 
