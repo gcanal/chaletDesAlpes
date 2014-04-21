@@ -1,0 +1,29 @@
+ {% extends "website/home.html"%}
+{# template lireNouvelle #}
+{#Page affichant une nouvelle a la fois#}
+
+
+{% block pub %}	
+{% endblock %}
+
+
+{% block content %} {# Taille du bloc 498px #}
+ {% load static %} 
+ {# <img src="{% static 'logos/imgNouvellesChaletDesAlpes.jpg' %}" alt="" width="495" />  <!--height="213" --> #}
+ 
+ 
+<h1>{{ nouvelle.titre }} </h1>   {# <span class="small"> dans {{ nouvelle.categorie.nom }}</span> #}
+<p class="infos">  {% trans "le" %} {{ nouvelle.date|date:"DATE_FORMAT" }}</p>  {#Rédigé par {{ nouvelle.auteur }}, #}
+
+<div class="contenu">{{ nouvelle.contenu|linebreaks }}</div>
+ <a href="{% url 'website.views.modifyNouvelleText' nouvelle.id %}" >
+   <button>Modifier le texte de la nouvelle</button>
+<a href="{% url 'website.views.modifyNouvelleImage' nouvelle.id %}" >
+	<button>Changer image</button></a>
+
+<a href="{% url 'website.views.deleteNouvelle' nouvelle.id %}" >
+	<button>Supprimer nouvelle</button></a>
+{% endblock %}
+ 
+{% block nouvelles %}
+{% endblock %}

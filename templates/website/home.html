@@ -1,0 +1,221 @@
+{% load static %}
+{% load i18n %}
+{% load websiteExtras %} 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+   <!-- <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet" media="screen"> Fuck le bootstrap-->
+   <link href="{{ STATIC_URL }}css/robert.css" rel="stylesheet" media="screen"> 
+   <title>{% block title %} {% trans "Chalet Djan e Glyâmo" %} {% endblock %}</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+{% block head %} {# if we want to personalize the head tag in other templates #} {% endblock %}
+</head>
+
+<body>
+<!--<div id="bodyWrapped"> -->
+<div id="bodyWrapped">
+	
+	
+{##############################################################  HEADER #############################################################}	
+{% block header %}
+  <header >
+	<p>
+	<a  href="{% url 'website.views.home' %}"><img src="{% static 'images/header2.png' %}" alt="" width="950" height="213"/></a>
+<!-- chalet_des_alpes_djan_e_gli2.png-->  
+</p>
+	<div id=languageSelector> 
+		{% if pageId != None %}
+			{% if LANGUAGE_CODE == 'fr' %} 
+				<a  id=language href="{% url 'website.views.activate' 'en' pageId %}"> English version </a> 
+			{% else %} 
+			<a  id=language href="{% url 'website.views.activate' 'fr' pageId %}"> Version française </a>
+			{% endif %}
+		{% endif %}
+	</div>
+</header>
+{% endblock %}
+
+
+
+{% block pub %}	
+<div class="pub">
+	{% trans "Vos vacances en chalet traditionnel des Alpes - Locations toute l'année" %}
+</div>
+{% endblock %}
+
+{###############################################################  NAV ###############################################################}
+	<nav > 	
+			<li ><a class={{pageId|isActive:0}} href="{% url 'website.views.home' %}">{% trans "Accueil" %}</a></li>
+			<li ><a class={{pageId|isActive:1}} href="{% url 'website.views.appartementDjanEGlyamo' %}">{% trans "Appartement <br/> Djan é Glyâmo" %}</a></li>		
+			<li ><a class={{pageId|isActive:2}} href="{% url 'website.views.appartementMestye' %}">{% trans "Appartement Mestyé" %}</a></li>
+			<li ><a class={{pageId|isActive:3}} href="{% url 'website.views.appartementMartna' %}">{% trans "Appartement Martnà" %}</a></li>
+			<li ><a class={{pageId|isActive:4}} href="{% url 'website.views.plusDuChalet' %}">{% trans "Les plus du chalet" %}</a></li>
+			<li ><a class={{pageId|isActive:5}} href="{% url 'website.views.coteCosy' %}">{% trans "Le côté cosy du chalet" %}</a></li>
+			<li ><a class={{pageId|isActive:6}} href="{% url 'website.views.aProximite' %}">{% trans "À proximité" %}</a></li>
+			<li ><a class={{pageId|isActive:7}} href="{% url 'website.views.pourVenir' %}">{% trans "Pour venir au chalet" %}</a></li>
+			<li ><a class={{pageId|isActive:8}} href="{% url 'website.views.reservations' %}">{% trans "Réservations" %}</a></li>
+			<li ><a class={{pageId|isActive:9}} href="{% url 'website.views.contact' %}">{% trans "Contact" %}</a></li>
+			{# {% if perms.nouvelles.add_section %} #}
+			{#<li ><a class={{pageId|isActive:10}} href="{% url 'website.views.creationSection' %}">Créer un section</a></li>{% endif %}#}
+			{% if perms.nouvelles.add_nouvelle %}
+			<li ><a class={{pageId|isActive:11}} href="{% url 'nouvelles.views.createNouvelle' %}">Créer une nouvelle</a></li> {% endif %}
+			{% if perms.website.add_lockedDate %}
+			<li ><a class={{pageId|isActive:15}} href="{% url 'website.views.calendrier' 3 %}">Calendrier Martnà</a></li> {% endif %}
+			{% if perms.website.add_lockedDate %}
+			<li ><a class={{pageId|isActive:16}} href="{% url 'website.views.calendrier' 1 %}">Calendrier <br/> Djan é Glyâmo</a></li> {% endif %}			
+	</nav>
+	
+<div id="main">		 
+
+
+{##########################################################  SECTIONS MAIN ##########################################################}		 
+{% block content %}
+{% endblock %} 
+{% block sections %}
+{# Nous sommes sur la vue {{view_name}} #}
+{% if pageId == None %}
+{% else %}{% if pageId < 10 %} {% if perms.website.add_section %}
+<a href="{% url 'website.views.creationSectionId' pageId 1 %}" ><button>Ajouter une section ici</button></a>{% endif %}{% endif %}{%endif %}
+
+{% if sections %}
+	{% for section in sections %}
+		{% if LANGUAGE_CODE == 'fr' or section.translated  %} {# if the section is not translated, we don' show it in the En version #}
+			<div class="section">
+				{% if section.titre %} <h3>{{ section.titre }}</h3> {% endif %}
+				{# <p>Je suis en position {{ section.position }}</p> #}
+				{% if section.paragraphe %}<p>{{ section.paragraphe|linebreaks }}</p> {% endif %}
+				
+					<p><a href="{{section.link}}" class="linkMain"> {{section.linkText}}</a> </p>
+				
+				{% if section.image %}
+					<img alt="{{ section.legende }}" src="{{MEDIA_URL}}{{ section.image }}" width="495"/>
+					<div class="legende">{{ section.legende}}</div>
+				{% endif %}
+			</div>
+			{% if perms.website.change_section %}
+			<a href="{% url 'website.views.modifySectionText' pageId section.position 'fr'%}" > <button>Modifier texte fr</button>
+			<a href="{% url 'website.views.modifySectionText' pageId section.position 'en'%}" > <button>Modifier texte en</button>
+			<a href="{% url 'website.views.modifySectionImage' pageId section.position %}" > <button>Changer image</button></a>
+			{% endif %}
+
+			{% if perms.website.add_section %}{% with posInc=section.position|add:"1" %} 
+			<a href="{% url 'website.views.creationSectionId' pageId posInc %}" ><button>Ajouter une section ici</button></a>
+			{% endwith %}{% endif %}
+		
+			{% if perms.website.delete_section  %}
+			<a href="{% url 'website.views.deleteSection' pageId section.position %}" ><button>Supprimer section</button></a>
+			{% endif %}
+			{% if perms.website.change_section %}
+				{% if section.translated %} {% else %} <p><strong> section non traduite</strong></p> {% endif %}
+				{% if section.modifiedInFr %} <p><strong> Section modifiée en français</strong></p>{% endif %}
+			{% endif %}
+		{% endif %}
+	{% endfor %}
+{% endif %} 
+{% endblock %}
+
+{% block contentMiddle %}
+{% endblock %}
+	
+{############################################################  NEWS MAIN ############################################################}
+{% block nouvelles %}
+	{% if nouvellesSection %} 
+	<div id="titreNouvelle">
+		<h1 >{% trans "Dernières nouvelles  de la page" %}</h1>
+	</div>
+		{% for nouvelle in nouvellesSection %}
+			{% if LANGUAGE_CODE == 'fr' or nouvelle.translated  %} 
+				<div class="maxiNouvelle" id="{{nouvelle.id}}">
+					<a href="{% url 'nouvelles.views.read' nouvelle.id %}"> <h2> {{ nouvelle.titre }}</h2> </a>
+					<p class="infos">  le {{ nouvelle.date|date:"DATE_FORMAT" }}</p> 
+					{% if nouvelle.image %} 
+						<p class="legende"><img alt="" src="{{MEDIA_URL}}{{ nouvelle.image }}" width="495"/>{{nouvelle.legende}}</p>
+					{% endif %}
+					{% if nouvelle.paragraphe %} {{ nouvelle.paragraphe|linebreaks }} {% endif %}
+					{% if nouvelle.link %}<p><strong>{% trans "lien : "%} </strong>
+						<a href="{{nouvelle.link}}" class="linkMain"> {{nouvelle.linkText}}</a> </p>
+					 {% endif %}		
+					{% if perms.nouvelles.change_nouvelle %}
+						{% if not nouvelle.translated %} 
+							<a href="{% url 'nouvelles.views.read' nouvelle.id %}">  <p><strong> non traduit</strong> </a>
+						{% elif nouvelle.modifiedInFr %} 
+							<a href="{% url 'nouvelles.views.read' nouvelle.id %}"><p><strong> modifié en fr </strong></p> </a>
+						{% else %}
+							<a href="{% url 'nouvelles.views.read' nouvelle.id %}"><p><strong>accès nouvelle</strong></p> </a>
+						{% endif %}
+					{% endif %}
+				</div>
+		{% endif %}
+	{% endfor %}
+{% endif %}
+{% endblock %} 
+{% block contentBottom %}
+{% endblock %}
+
+	</div>  <!-- id="main" -->
+	
+
+{###########################################################  NEWS ASIDE  ###########################################################}
+	<aside  >
+{% block aside %}
+	<div id="headAside"> 
+		<a  href="{% url 'nouvelles.views.homeNouvelles' %}"> <img src="{% static 'logos/imgNouvellesChaletDesAlpes.jpg' %}" alt="" width="160" /> </a>  <!--height="213" -->
+    </div>
+	{% if dernieresNouvelles%} 
+		{% for nouvelle in dernieresNouvelles %}{% with view=nouvelle.nouvellePageId|pageIdToView %}
+			{% if LANGUAGE_CODE == 'fr' or nouvelle.translated  %} 
+				<div class=miniNouvelle>
+					<h3 >{{ nouvelle.titre }}</h3>
+					{% if nouvelle.image %} <img alt="" src="{{MEDIA_URL}}{{ nouvelle.image }}" width="160"/> {% endif %}
+					<p><em>{{ nouvelle.resume }}</em></p>
+					<p><a class="linkAside" href="{% url view %}#{{nouvelle.id}}">{% trans "Pour en savoir plus" %}</a> </p> 	
+					{% if perms.nouvelles.change_nouvelle %}
+						{% if not nouvelle.translated %} 
+							<a href="{% url 'nouvelles.views.read' nouvelle.id %}">  <p><strong> non traduit</strong> </a>
+						{% elif nouvelle.modifiedInFr %} 
+							<a href="{% url 'nouvelles.views.read' nouvelle.id %}"><p><strong> modifié en fr </strong></p> </a>
+						{% else %}
+							<a href="{% url 'nouvelles.views.read' nouvelle.id %}"><p><strong>accès nouvelle</strong></p> </a>
+						{% endif %}
+					{% endif %}
+				</div>
+			{% endif %}
+		{% endwith %} {% endfor %}	
+	{% endif %} 
+{% endblock %}
+
+{% block nouvelleCounter %}
+	{% if perms.website.change_nouvelleCounter %}
+		<div id=nouvelleCounter>
+			<a href="{% url 'website.views.nouvelleCounter' pageId %}" ><i class="fa fa-arrows-v fa-lg"></i> changer le nombre de nouvelles affichées	 </a>
+		</div>
+	{% endif %}
+{% endblock %}	
+	</aside>
+</div>
+	
+{#############################################################  FOOTER ##############################################################}
+<footer>
+ <div class="footerwrapper">
+	<div class="footer1"><a href="{% url 'website.views.home' %}" ><i class="fa fa-h-square fa-lg"></i> Homepage </a></div>
+	<div class="footer1"><a href="#bodyWrapped" ><i class="fa fa-arrow-circle-up fa-lg"></i>{% trans "Haut" %}</a></div>
+	<div class="footer1">
+		{% if user.is_authenticated %}
+		<a href="{% url 'website.views.deconnexion' %}" ><i class="fa fa-sign-out fa-lg"></i> Déconnexion </a>
+		{% else %}
+		<a href="{% url 'website.views.connexion' %}" ><i class="fa fa-sign-in fa-lg"></i> Administration</a>
+		{% endif %}
+	</div>
+	<div class="footer1">
+		<a href="http://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/badges/djangoproject120x25_grey.gif" 
+		border="0" alt="A Django project." title="A Django project." /></a>
+	  </div>
+ </div>
+</footer>
+
+</body>
+
+</html>
+

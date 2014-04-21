@@ -1,0 +1,28 @@
+ 
+  {% extends "website/home.html"%}
+{# template nouvelles/accueilNouvelles #}
+{% load i18n %}
+{% block pub %}	
+{% endblock %}
+
+{% block content %} {# Taille du bloc 498px #}
+
+ <h1>{% trans "Les dernières nouvelles" %} </h1>
+{% for nouvelle in dernieres_nouvelles %}
+    <div class="nouvelle">
+        <h3>{{ nouvelle.titre }}</h3>
+        <p>{{ nouvelle.paragraphe|truncatewords_html:80 }}</p>
+        <p><a href="{% url "nouvelles.views.read" nouvelle.id %}">Lire la suite</a> </p>
+    </div>
+{% empty %}
+    <p>Aucun article</p>
+{% endfor %}
+
+ {% endblock %}  
+
+ {% block nouvelles %}
+{% endblock %}
+
+
+
+

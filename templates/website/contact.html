@@ -1,0 +1,132 @@
+{% extends "website/home.html"%}
+{% load i18n %}
+{# template contact#}
+ {% load static %} 
+{% block head %} 
+<link href="{% static 'jquery-ui-1.10.4.custom/css/custom-theme/jquery-ui-1.10.4.custom.css' %}" rel="stylesheet">
+<script type="text/javascript" src="{% static 'jquery-ui-1.10.4.custom/js/jquery-1.10.2.js' %}"></script>
+<script type="text/javascript" src="{% static 'jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js' %}"></script>
+{% endblock %}
+
+{% comment %}
+{% block pub %}	
+{% endblock %}
+{% endcomment %}
+
+{% block content %} {# Taille du bloc 498px #}
+ <img src="{% static 'logos/imgContactDjanGlyamo.jpg' %}" alt="" width="495" />  <!--height="213" -->
+{% endblock %}
+{% block contentMiddle %}
+<script> 
+$(document).ready(function() {
+	
+  var calendarSelected=1;
+  var choix = document.getElementById('id_purpose');
+  var startDate=document.getElementById('startDate');startDate.style.display = 'block';
+  var endDate=document.getElementById('endDate');endDate.style.display = 'block';
+  var appSel=document.getElementById('id_appartementSelection');
+  var firstName=document.getElementById('id_firstName');firstName.style.display = 'block';
+  var lastName=document.getElementById('id_lastName');lastName.style.display = 'block';
+  var subject=document.getElementById('id_subject');subject.style.display = 'block';
+  var message=document.getElementById('id_message');message.style.display = 'block';
+  var sender=document.getElementById('id_sender');sender.style.display= 'block';
+  
+  appSel.addEventListener('change', function(e) {
+	if (appSel.selectedIndex==0){calendarSelected=1;}//1 for DjanEGlyamoEGlyamo
+	else{calendarSelected=3;}//3 for DjanEGlyamo
+  }, true);
+  
+  choix.addEventListener('change', function(e) {
+     if (choix.selectedIndex==1){
+		 //startDate.disabled=true;endDate.disabled=true;
+		 startDate.parentNode.style.display = 'none';endDate.parentNode.style.display = 'none';
+		 appSel.parentNode.style.display = 'none';
+		 }// sans demande de reservation
+     else {
+		 //startDate.disabled=false;endDate.disabled=false;
+		 startDate.parentNode.style.display = 'block';endDate.parentNode.style.display = 'block';
+		 startDate.style.display='block';endDate.style.display='block';
+		 appSel.parentNode.style.display = 'block';appSel.parentNode.style.display = 'inline';
+		 }
+  }, true);
+  
+    function areEquals(date1,date2){
+		if ((date1.getFullYear()===date2.getFullYear()) && (date1.getMonth() == date2.getMonth()) && (date1.getDate() == date2.getDate()))
+			{return true;}
+		else {return false;}
+	}
+	var today = new Date();
+	var yesterday=today.setDate(today.getDate() - 1);
+	var tabDayNamesMin=['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
+	var tabMonthNames=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+	var varNext='suivant';var varPrev='précédent';
+	var mssg1 ='pas encore réservable';var mssg2 = 'non réservable';var mssg3 = 'disponible'; var mssg4='passé';
+	var varDateFormat='dd/mm/yy';
+	{% if LANGUAGE_CODE == 'en'%}
+	 tabDayNamesMin=['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+	 tabMonthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
+	 varNext='next';varPrev='previous';
+	 mssg1='not yet available';mssg2='not available';mssg3='available';mssg4='past';
+	 varDateFormat='mm/dd/yy';
+	{% endif %} 
+	
+	var lastDateDjanEGlyamo= new Date("{{ lastDateDjanEGlyamo.isoformat }}");// for DjanEGlyamo
+	var lastDateMartna= new Date("{{ lastDateMartna.isoformat }}");// for Martna
+
+    $('#startDate').datepicker({   
+		inline: true, 
+		minDate:today,maxDate:"+1y+4m",
+		dateFormat: varDateFormat,
+		firstDay: 6,nextText:varNext,prevText:varPrev,        
+        dayNamesMin: tabDayNamesMin,
+        monthNames :tabMonthNames,
+        beforeShowDay: selectDate,
+        showOtherMonths: true,
+    }); 
+    $('#endDate').datepicker({   
+		inline: true,
+		minDate:today,maxDate:"+1y+4m",
+		dateFormat: varDateFormat,
+		firstDay: 6,nextText:varNext,prevText:varPrev,
+        dayNamesMin: tabDayNamesMin,
+        monthNames :tabMonthNames,
+        beforeShowDay: selectDate,
+        showOtherMonths: true,
+    });  
+        function selectDjanEGlyamo(date){
+		if (date < yesterday) {return [false,'',mssg4]; }
+		if (date>lastDateDjanEGlyamo){return [false,'',mssg1]; }
+		{% if lockedDatesDjanEGlyamo %}
+		{% for ld in lockedDatesDjanEGlyamo %}var d=new Date("{{ ld.date.isoformat }}"); 
+		if (areEquals(d,date)){return [false,'',mssg2];}{% endfor %}
+		return [true,'',mssg3];
+		{% else %}return [true,'',mssg3];{% endif %}}
+    function selectMartna(date) {
+		if (date < yesterday) {return [false,'',mssg4]; }
+		if (date>lastDateMartna){return [false,'',mssg1]; }
+		{% if lockedDatesMartna %}
+		{% for ld in lockedDatesMartna %}var d=new Date("{{ ld.date.isoformat }}"); 
+		if (areEquals(d,date)){return [false,'',mssg2];}{% endfor %}
+		return [true,'',mssg3];
+		{% else %}return [true,'',mssg3];{% endif %}} 
+    
+    function selectDate(date){
+		if (calendarSelected==1){return selectDjanEGlyamo(date);}// 1 for DjanEGlyamo
+		else {return selectMartna(date);}// 1 for DjanEGlyamo
+		}    
+});
+</script>
+
+{% if success %}
+	<h3 align="center"> {% trans "Votre message a été envoyé" %} </h3>
+	{% if cc_myself %}
+		<p align="center"> {% trans "Vous devriez reçevoir un copie sous peu" %}</p>
+	{% endif %}
+{% else %}
+	<form method="post" action=".">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<input type="submit" value="envoyer"/> 
+	</form>
+{% endif %}
+{% endblock %}  

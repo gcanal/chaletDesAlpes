@@ -1,0 +1,15 @@
+{% extends "website/home.html" %}
+{# template NouvelleDone : message affiche lors de la soumission d'une nouvelle #}
+
+
+
+{% block content %} {# Taille du bloc 498px #} 
+ <h3>Gestion des nouvelles</h3>
+ <p> La nouvelle a été créée </p> 
+
+{% for form in form_data%}
+{{form}}
+{% endfor %}
+
+{% endblock %}
+ 

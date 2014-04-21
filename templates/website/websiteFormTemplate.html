@@ -1,0 +1,146 @@
+{% extends "website/home.html"%}
+{# template websiteFormTemplate #}
+{% load i18n %}
+
+{% load static %}
+
+{% if calendarSetup %}
+{% block head %} 
+<link href="{% static 'jquery-ui-1.10.4.custom/css/custom-theme/jquery-ui-1.10.4.custom.css' %}" rel="stylesheet">
+<script type="text/javascript" src="{% static 'jquery-ui-1.10.4.custom/js/jquery-1.10.2.js' %}"></script>
+<script type="text/javascript" src="{% static 'jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js' %}"></script>
+{% endblock %}
+{% endif %}
+
+
+{% comment %}
+{% block pub %}	
+{% endblock %}
+{% endcomment %}
+
+{% block content %} {# Taille du bloc 498px #}
+
+{% if imageModification %}
+<h1 align="center">Changement d'image</h1>
+{% endif %}
+{% if textModification %}
+<h1 align="center">Changement du texte</h1>
+		{% if lan == 'en' %} <h2 align="center"> Version anglaise </h2> {% endif %}
+		{% if lan == 'fr' %} <h2 align="center"> Version française </h2> {% endif %}
+{% endif %}
+
+{% if NouvelleCounterDisplay %}
+<h1>Nouvelles affichées sur la page {{pageName}}</h1>
+	<form method="post" enctype="multipart/form-data" action=".">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<input type="submit" value="changer"/> 
+	</form>
+{% endif %}
+
+
+{% if authentification %}
+	<h1>Authentification</h1>
+	{% if error %}
+		<p><strong>Mauvaise saisie</strong></p>
+	{% endif %}
+	{% if user.is_authenticated %}
+	Vous êtes connecté, {{ user.username }} !
+	{% else %}
+	<form method="post" action=".">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<input type="submit" value="authentification"/> <!-- value="Soumettre" -->
+	</form>
+	{% endif %}
+{% endif %}
+{% if displayForm %}
+	<form method="post" enctype="multipart/form-data" action=".">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<input type="submit" value={% trans "soumettre" %}/> 
+	</form>
+{% endif %}
+
+{% if calendarSetup %}
+
+	<script> 
+
+$(document).ready(function() {
+	var today = new Date();
+	var lastDate= new Date("{{ lastDate.isoformat }}");
+	var today = new Date();
+	var tabDayNamesMin=['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
+	var tabMonthNames=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+	var varNext='suivant';var varPrev='précédent';var varDateFormat='dd/mm/yy';
+	{% if LANGUAGE_CODE == 'en'%}
+	 tabDayNamesMin=['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+	 tabMonthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
+	 varNext='next';varPrev='previous';varDateFormat='mm/dd/yy';
+	{% endif %}    
+    $('#lastDate').datepicker({   
+		inline: true,  
+		minDate:today,maxDate:"+1y+4m",         
+        dateFormat: varDateFormat,
+        firstDay: 6,nextText:varNext,prevText:varPrev,
+        dayNamesMin: tabDayNamesMin,
+        monthNames :tabMonthNames,
+        defaultDate: lastDate,
+        beforeShowDay: selectLastDate,
+        showOtherMonths: true,
+    });
+    $('#startDate').datepicker({   
+		inline: true, 
+		minDate:today,maxDate:"+1y+4m",
+		dateFormat: varDateFormat,
+		firstDay: 6,nextText:varNext,prevText:varPrev,        
+        dayNamesMin: tabDayNamesMin,
+        monthNames :tabMonthNames,
+        beforeShowDay: selectStartDate,
+        showOtherMonths: true,
+    }); 
+    $('#endDate').datepicker({   
+		inline: true,
+		minDate:today,maxDate:"+1y+4m",
+		dateFormat: varDateFormat,
+		firstDay: 6,nextText:varNext,prevText:varPrev,
+        dayNamesMin: tabDayNamesMin,
+        monthNames :tabMonthNames,
+        beforeShowDay:selectEndDate,
+        showOtherMonths: true,
+    }); 
+    function  selectLastDate(date){
+		if (date<today){return [false,'','non sélectionable'];}
+		else{return [true,'','sélectionable'];}
+	}
+    //change date format selon nationalite
+    function selectLastDate(date){return [true,'','cliquez pour définir la fin du calendrier'];}
+    function selectStartDate(date){return [true,'','début de la période de sélection'];}
+    function selectEndDate(date){return [true,'','fin de la période de sélection'];}     
+});
+</script>
+	{% if appartId == 1  %} <h1> Modification de calendrier chez Djan é Glyâmo </h1>{% endif %}
+	{% if appartId == 3 %} <h1> Modification de calendrier chez Martnà </h1>{% endif %}
+	{% if lastDate %}<p>Date de fin de calendrier courante : {{lastDate.day}} / {{lastDate.month}} /{{lastDate.year}} </p> {% endif %}
+	<form method="post" action=".">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<input type="submit" value="envoyer"/> 
+	</form>
+	<h1> Liste des jours verrouilles</h1>
+	{% if lockedDates %}
+	<ul>
+	{% for lockedDate in lockedDates %}
+	<li>{{lockedDate.date.day}} / {{lockedDate.date.month}} /{{lockedDate.date.year}} </li>
+	{% endfor %}
+	</ul>
+	{% else %}
+	<p> Pas de jours verrouillés</p>
+	{% endif %}
+
+{% endif %}
+{% endblock %}  
+
+{% block nouvelleCounter %} 
+{% endblock %}  
+

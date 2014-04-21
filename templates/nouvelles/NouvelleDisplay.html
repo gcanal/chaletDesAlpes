@@ -1,0 +1,58 @@
+ {% extends "website/home.html"%}
+{# template Nouvelle Display #}
+{% load i18n %}
+{# this templates is used to displayed the birth, life and death of a Nouvelle object #}
+
+{% block pub %}	
+{% endblock %}
+
+{% block content %} {# block size 498px #}
+ {% load static %} 
+  <img src="{% static 'logos/imgNouvellesChaletDesAlpes.jpg' %}" alt="" width="495" />  <!--height="213" --> 
+ 
+{% if read %}
+
+	<h1>{{ nouvelle.titre }} </h1>   {# <span class="small"> dans {{ nouvelle.categorie.nom }}</span> #}
+	<p class="infos"> {% trans "le" %} {{ nouvelle.date|date:"DATE_FORMAT" }}</p> 
+	{% if nouvelle.image %} 
+		<p class="legende"><img alt="" src="{{MEDIA_URL}}{{ nouvelle.image }}" width="495"/>{{nouvelle.legende}}</p>
+	{% endif %}
+	{% if nouvelle.paragraphe %} {{ nouvelle.paragraphe|linebreaks }} {% endif %}
+	{% if nouvelle.link %}
+		<p><strong>{% trans "lien : "%} </strong>
+		<a href="{{nouvelle.link}}" class="linkMain"> {{nouvelle.linkText}}</a> </p> 
+	{% endif %}
+	{% if perms.nouvelles.change_nouvelle %}
+		<a href="{% url 'nouvelles.views.modifyNouvelleText' nouvelle.id  'fr' %}" ><button>Modifier texte fr</button>
+		<a href="{% url 'nouvelles.views.modifyNouvelleText' nouvelle.id  'en' %}" ><button>Modifier texte en</button>
+		<a href="{% url 'nouvelles.views.modifyNouvelleImage' nouvelle.id %}" ><button>Changer image</button></a> 
+	{% endif %}
+	{% if perms.nouvelles.delete_nouvelle  %}
+		<a href="{% url 'nouvelles.views.deleteNouvelle' nouvelle.id %}" ><button>Supprimer nouvelle</button></a>
+	{% endif %}
+
+	
+{% elif delete %}
+	<p> Nouvelle effacée </p>
+
+{% else %} {# if modifyImage=True or modifyText=True or create=True, we display a formulary #}
+	{% if modifyImage %} <h1> Modification de l'image </h1> {% endif %}
+	{% if modifyText %} 
+		{% if lan == 'fr' %} <h1> Modification du texte en version française </h1> 
+		{% else %} <h1> Modification du texte en version anglaise</h1>
+		{% endif %}
+	{% endif %}
+	{% if create %} <h1> Création de la nouvelle en version française </h1> {% endif %}
+    <form method="post" enctype="multipart/form-data" action=".">
+		{# enctype="multipart/form-data pour que le navigateur envoie les fichiers au serveur web #}
+       {% csrf_token %}
+       {{ form.as_p }}
+       <input type="submit" value="Go"/>
+    </form>
+    
+{% endif %}
+
+{% endblock %}
+ 
+ {% block nouvelleCounter %} {#  ugly solution : the nouvelleCounter block must not be seen on this page#}
+{% endblock %}  

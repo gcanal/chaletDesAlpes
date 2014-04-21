@@ -1,0 +1,113 @@
+{% extends "website/home.html"%}
+{% load i18n %}
+{# template reservations#}
+
+{% block head %}
+{% load static %}
+
+<link href="{% static 'jquery-ui-1.10.4.custom/css/custom-theme/jquery-ui-1.10.4.custom.css' %}" rel="stylesheet">
+<script type="text/javascript" src="{% static 'jquery-ui-1.10.4.custom/js/jquery-1.10.2.js' %}"></script>
+<script type="text/javascript" src="{% static 'jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js' %}"></script>
+<!-- For a custom calendar widget see : http://jqueryui.com/themeroller -->
+	<script> 
+$(document).ready(function() {
+	var today = new Date();
+	var yesterday=today.setDate(today.getDate() - 1);
+	var tabDayNamesMin=['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
+	var tabMonthNames=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+	var varNext='suivant';var varPrev='précédent';
+	var mssg1 ='pas encore réservable';var mssg2 = 'non réservable';var mssg3 = 'disponible'; var mssg4='passé';
+	var varDateFormat='dd/mm/yy';
+	{% if LANGUAGE_CODE == 'en'%}
+	 tabDayNamesMin=['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+	 tabMonthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
+	 varNext='next';varPrev='previous';
+	 mssg1='not yet available';mssg2='not available';mssg3='available';mssg4='past';
+	 varDateFormat='mm/dd/yy';
+	{% endif %}    
+    $('#reservationMartna').datepicker({   
+		inline: true,
+        minDate:today,maxDate:"+1y+1m",
+		dateFormat: varDateFormat,
+		firstDay: 6,nextText:varNext,prevText:varPrev,
+        dayNamesMin: tabDayNamesMin,
+        monthNames:tabMonthNames,
+        beforeShowDay: selectMartna,
+        showOtherMonths: true,
+    });
+    $('#reservationDjanEGlyamo').datepicker({   
+		inline: true,
+		minDate:today,maxDate:"+1y+1m",
+		dateFormat: varDateFormat,
+		firstDay: 6,nextText:varNext,prevText:varPrev,
+        dayNamesMin: tabDayNamesMin,
+        monthNames :tabMonthNames,             
+        beforeShowDay: selectDjanEGlyamo,
+        showOtherMonths: true,
+    });    
+    // Zu tun  change style impossible
+    // ou mettre javascript dans django
+    // chercher maxDate dans datapicker
+    //change date format selon nationalite
+    function areEquals(date1,date2){
+		if ((date1.getFullYear()===date2.getFullYear()) && (date1.getMonth() == date2.getMonth()) && (date1.getDate() == date2.getDate()))
+			{return true;}
+		else {return false;}
+	}
+	//var mssg1 = '{% trans "pas encore réservable" %}';
+	//var mssg2 = '{% trans "non réservable" %}';
+	//var mssg3 = '{% trans "Disponible" %}';
+	
+	//var mssg3 = new String("{% trans "Disponible" %}");
+    function selectDjanEGlyamo(date){
+		if (date<yesterday){return [false,'', mssg4 ]; }
+		var lastDate=new Date("{{ lastDateDjanEGlyamo.isoformat }}");
+		if (date>lastDate){return [false,'', mssg1 ]; }
+		{% if lockedDatesDjanEGlyamo %}
+		{% for ld in lockedDatesDjanEGlyamo %}var d=new Date("{{ ld.date.isoformat }}"); 
+		if (areEquals(d,date)){return [false,'', mssg2 ];}{% endfor %}
+		return [true,'', mssg3 ];
+		{% else %}return [true,'', mssg3 ];{% endif %}}
+    function selectMartna(date) {
+		var lastDate=new Date("{{ lastDateMartna.isoformat }}");
+		if (date<yesterday){return [false,'', mssg4 ]; }
+		if (date>lastDate){return [false,'', mssg1 ]; }
+		{% if lockedDatesMartna %}
+		{% for ld in lockedDatesMartna %}var d=new Date("{{ ld.date.isoformat }}"); 
+		if (areEquals(d,date)){return [false,'', mssg2 ];}{% endfor %}
+		return [true,'', mssg3 ];
+		{% else %}return [true,'', mssg3 ];{% endif %}}  
+});
+</script>
+{% endblock %}
+{% comment %}
+{% block pub %}	
+{% endblock %}
+{% endcomment %}
+{% block content %}
+</br>
+ <img src="{% static 'logos/imgReservationCalendrier.jpg' %}" alt="" width="495" />  <!--height="213" -->
+{% endblock %}
+{% block contentBottom %} {# Taille du bloc 498px #}
+ {% load static %} 
+ {# {{ip}} #}
+ <h2 align="center" >{% trans "Disponiblités pour l'appartement Martnà" %}</h2>
+<div align="center" id="reservationMartna"></div> </br>
+	{% comment %}
+	<h1> Liste des jours verrouilles</h1>
+	{% if lockedDatesMartna %}
+	<ul>
+	{% for lockedDate in lockedDatesMartna %}
+	<li>{{lockedDate.date.day}} / {{lockedDate.date.month}} /{{lockedDate.date.year}} </li>
+	{% endfor %}
+	</ul>
+	{% else %}
+	<p> Pas de jours verrouillés</p>
+	{% endif %}
+	{% endcomment %}
+  <h2 align="center" > {% trans "Disponiblités pour l'appartement Djan é Glyâmo" %} </h2>
+<div align="center" id="reservationDjanEGlyamo"></div>
+ 
+ <div align="center" id="reservationLink"> <a href="{% url 'website.views.contact' %}#id_purpose"> <i class="fa fa-calendar"></i> {% trans "Faire une demande de réservation" %} </a> </div>
+ 
+ {% endblock %}  
