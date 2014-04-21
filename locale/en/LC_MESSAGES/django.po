@@ -1,0 +1,201 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-03-25 23:37+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: chaletDesAlpes/settings.py:117
+msgid "French"
+msgstr "Français"
+
+#: chaletDesAlpes/settings.py:118
+msgid "English"
+msgstr "English"
+
+#: templates/nouvelles/NouvelleDisplay.html:16
+#: templates/nouvelles/lireNouvelle.html:16
+msgid "le"
+msgstr "on"
+
+#: templates/nouvelles/NouvelleDisplay.html:22 templates/website/home.html:137
+msgid "lien : "
+msgstr "link : "
+
+#: templates/nouvelles/accueilNouvelles.html:10
+msgid "Les dernières nouvelles"
+msgstr "Last news"
+
+#: templates/website/contact.html:121
+msgid "Votre message a été envoyé"
+msgstr "Your message has been sent successfully"
+
+#: templates/website/contact.html:123
+msgid "Vous devriez reçevoir un copie sous peu"
+msgstr "You should receive a copy very soon"
+
+#: templates/website/home.html:11
+msgid "Chalet Djan e Glyâmo"
+msgstr "Chalet Djan e Glyâmo"
+
+#: templates/website/home.html:44
+msgid "Vos vacances en chalet traditionnel des Alpes - Locations toute l'année"
+msgstr ""
+"Take a holiday in a traditional alpine chalet - All seasons rental in the "
+"French Alps "
+
+#: templates/website/home.html:50
+msgid "Accueil"
+msgstr "Home"
+
+#: templates/website/home.html:51
+msgid "Appartement <br/> Djan é Glyâmo"
+msgstr "At Djan and Glyâmo's"
+
+#: templates/website/home.html:52
+msgid "Appartement Mestyé"
+msgstr "At Mestyé's "
+
+#: templates/website/home.html:53
+msgid "Appartement Martnà"
+msgstr "At Martnà's "
+
+#: templates/website/home.html:54
+msgid "Les plus du chalet"
+msgstr "Assets"
+
+#: templates/website/home.html:55
+msgid "Le côté cosy du chalet"
+msgstr "Le côté cosy"
+
+#: templates/website/home.html:56
+msgid "À proximité"
+msgstr "Close to us"
+
+#: templates/website/home.html:57
+msgid "Pour venir au chalet"
+msgstr "How to come"
+
+#: templates/website/home.html:58
+msgid "Réservations"
+msgstr "Booking"
+
+#: templates/website/home.html:59
+msgid "Contact"
+msgstr "Contact us"
+
+#: templates/website/home.html:126
+msgid "Dernières nouvelles  de la page"
+msgstr "Last news on this page"
+
+#: templates/website/home.html:173
+msgid "Pour en savoir plus"
+msgstr "See more"
+
+#: templates/website/home.html:203
+msgid "Haut"
+msgstr "Up"
+
+#: templates/website/reservations.html:57
+msgid "pas encore réservable"
+msgstr "not yet available"
+
+#: templates/website/reservations.html:58
+msgid "non réservable"
+msgstr "not available"
+
+#: templates/website/reservations.html:59
+#: templates/website/reservations.html:61
+msgid "Disponible"
+msgstr "Available"
+
+#: templates/website/reservations.html:94
+msgid "Disponiblités pour l'appartement Martnà"
+msgstr "Availabilities at Martnà's"
+
+#: templates/website/reservations.html:109
+#, fuzzy
+msgid "Disponiblités pour l'appartement Djan é Glyâmo"
+msgstr "Availabilities at Djan's"
+
+#: templates/website/reservations.html:112 website/forms.py:120
+msgid "Faire une demande de réservation"
+msgstr "Make a booking request"
+
+#: templates/website/websiteFormTemplate.html:61
+msgid "soumettre"
+msgstr "Submit"
+
+#: website/forms.py:120
+msgid "Vous voulez"
+msgstr "You want to "
+
+#: website/forms.py:120
+msgid "Écrire un poème"
+msgstr "Write a poem"
+
+#: website/forms.py:121
+msgid "Prénom (facultatif)"
+msgstr "First name (optional)"
+
+#: website/forms.py:122
+msgid "Nom (facultatif)"
+msgstr "Last name (optional)"
+
+#: website/forms.py:123
+msgid "Appartement "
+msgstr "Appartment"
+
+#: website/forms.py:123
+msgid "DjanEGlyamo"
+msgstr ""
+
+#: website/forms.py:123
+msgid "Martnà"
+msgstr "At Martna's"
+
+#: website/forms.py:124
+msgid "Début de la période"
+msgstr "Check-in date"
+
+#: website/forms.py:125
+msgid "Fin de la période"
+msgstr "Check-out date"
+
+#: website/forms.py:126
+msgid "Sujet (facultatif)"
+msgstr "Subject (optional)"
+
+#: website/forms.py:127
+msgid "Message"
+msgstr "Your message"
+
+#: website/forms.py:128
+msgid "Votre email s'il vous plaît "
+msgstr "your email please"
+
+#: website/forms.py:129
+msgid "Reçevoir un copie du mail"
+msgstr "Get a copy"
+
+#: website/forms.py:133
+msgid "Êtes-vous un robot ?"
+msgstr "Are you a robot ?"
+
+#~ msgid "Appartement Djan"
+#~ msgstr "At Djan's"
+
+#~ msgid "Djan"
+#~ msgstr "At Djan's"
