@@ -6,7 +6,6 @@ from django.conf.urls.static import static
 from django.conf import settings 
 from django.conf.urls.i18n import i18n_patterns
 
-
 admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^i18n/', include('django.conf.urls.i18n')),#not  within i18n_patterns() - it needs to be language-independent 
