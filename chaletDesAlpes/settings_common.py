@@ -139,5 +139,13 @@ TEMPLATE_LOADERS = (
         'django.template.loaders.app_directories.Loader',
 #    )),
 )
+################################# DEBUG ################################
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG 
+# this value might be changed by the  settings_deployement.py 
+#called by the script init.py
 
 ROOT_URLCONF = 'chaletDesAlpes.urls'
+
+######################## LUKE ICH BIN DEIN VATER #######################
+WSGI_APPLICATION = 'chaletDesAlpes.wsgi.application'
