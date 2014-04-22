@@ -1,4 +1,4 @@
-
+#-*- coding: utf-8 -*-
 from django.conf.urls import patterns, include, url
 #from website.views import NouvelleWizard
 #from website.forms import SectionForm, CalendarSetUpForm

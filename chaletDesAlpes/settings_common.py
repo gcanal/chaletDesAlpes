@@ -130,8 +130,14 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 #"chaletDesAlpes.context_processors.view_name_context_processor",
 )
 
+########################### TEMPLATE_LOADERS ###########################
+# List of callables that know how to import templates from various
+#sources - only used in production
+TEMPLATE_LOADERS = (
+#    ('django.template.loaders.cached.Loader', (
+        'django.template.loaders.filesystem.Loader',
+        'django.template.loaders.app_directories.Loader',
+#    )),
+)
+
 ROOT_URLCONF = 'chaletDesAlpes.urls'
-
-
-
-
