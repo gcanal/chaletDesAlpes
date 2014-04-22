@@ -1,1 +1,4 @@
-PYTHONPATH=/home/gcanal/django-chaletDesAlpes:/home/gcanal/chaletDesAlpes:/home/gcanal/chaletDesAlpes/chaletDesAlpes:. python manage.py runserver 127.0.0.1:62021
+#PYTHONPATH=/home/gcanal/django-chaletDesAlpes:/home/gcanal/chaletDesAlpes:/home/gcanal/chaletDesAlpes/chaletDesAlpes:. python manage.py runserver 127.0.0.1:62021
+PYTHONPATH=/home/gcanal/myPython:/home/gcanal/chaletDesAlpes:/home/gcanal/chaletDesAlpes/chaletDesAlpes:. python manage.py runserver 127.0.0.1:62021
+
+
