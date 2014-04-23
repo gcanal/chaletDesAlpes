@@ -150,5 +150,5 @@ ROOT_URLCONF = 'chaletDesAlpes.urls'
 ######################## LUKE ICH BIN DEIN VATER #######################
 WSGI_APPLICATION = 'chaletDesAlpes.wsgi.application'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = '*'
 
