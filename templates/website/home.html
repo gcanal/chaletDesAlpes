@@ -10,8 +10,42 @@
    <link href="{{ STATIC_URL }}css/robert.css" rel="stylesheet" media="screen"> 
    <title>{% block title %} {% trans "Chalet Djan e Glyâmo" %} {% endblock %}</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
 {% block head %} {# if we want to personalize the head tag in other templates #} {% endblock %}
 </head>
+
+<script >
+$(function() {
+    // Stick the #nav to the top of the window
+    var nav = $('nav');
+    var navHomeY = nav.offset().top;
+    var isFixed = false;
+    var $w = $(window);
+    
+    $w.scroll(function() {
+        var scrollTop = $w.scrollTop();
+        var shouldBeFixed = scrollTop > navHomeY;
+        var isScrollPossible=$w.height() > nav.height();
+        if (shouldBeFixed && !isFixed && isScrollPossible) {
+            nav.css({
+                position: 'fixed',
+                top: 0,
+                left: nav.offset().left,
+                width: nav.width()
+            });
+            isFixed = true;
+        }
+        else if (!shouldBeFixed && isFixed )
+        {
+            nav.css({
+                position: 'static'
+            });
+            isFixed = false;
+        }
+    });
+});
+
+</script>
 
 <body>
 <!--<div id="bodyWrapped"> -->
@@ -46,6 +80,7 @@
 {% endblock %}
 
 {###############################################################  NAV ###############################################################}
+	<div id="nav-container">
 	<nav > 	
 			<li ><a class={{pageId|isActive:0}} href="{% url 'website.views.home' %}">{% trans "Accueil" %}</a></li>
 			<li ><a class={{pageId|isActive:1}} href="{% url 'website.views.appartementDjanEGlyamo' %}">{% trans "Appartement <br/> Djan é Glyâmo" %}</a></li>		
@@ -66,6 +101,7 @@
 			{% if perms.website.add_lockedDate %}
 			<li ><a class={{pageId|isActive:16}} href="{% url 'website.views.calendrier' 1 %}">Calendrier <br/> Djan é Glyâmo</a></li> {% endif %}			
 	</nav>
+	</div>
 	
 <div id="main">		 
 
