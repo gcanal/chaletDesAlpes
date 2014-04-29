@@ -80,6 +80,7 @@
 {###############################################################  NAV ###############################################################}
 	<div id="nav-container">
 	<nav > 	
+		<ul>
 			<li ><a class={{pageId|isActive:0}} href="{% url 'website.views.home' %}">{% trans "Accueil" %}</a></li>
 			<li ><a class={{pageId|isActive:1}} href="{% url 'website.views.appartementDjanEGlyamo' %}">{% trans "Appartement <br/> Djan é Glyâmo" %}</a></li>		
 			<li ><a class={{pageId|isActive:2}} href="{% url 'website.views.appartementMestye' %}">{% trans "Appartement Mestyé" %}</a></li>
@@ -98,6 +99,7 @@
 			<li ><a class={{pageId|isActive:15}} href="{% url 'website.views.calendrier' 3 %}">Calendrier Martnà</a></li> {% endif %}
 			{% if perms.website.add_lockedDate %}
 			<li ><a class={{pageId|isActive:16}} href="{% url 'website.views.calendrier' 1 %}">Calendrier <br/> Djan é Glyâmo</a></li> {% endif %}			
+		</ul>
 	</nav>
 	</div>
 	
@@ -119,7 +121,7 @@
 			<div class="section">
 				{% if section.titre %} <h3>{{ section.titre }}</h3> {% endif %}
 				{# <p>Je suis en position {{ section.position }}</p> #}
-				{% if section.paragraphe %}<p>{{ section.paragraphe|linebreaks }}</p> {% endif %}
+				{% if section.paragraphe %}{{ section.paragraphe|linebreaks }} {% endif %}
 				
 					<p><a href="{{section.link}}" class="linkMain"> {{section.linkText}}</a> </p>
 				
@@ -244,7 +246,7 @@
 	</div>
 	<div class="footer1">
 		<a href="http://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/badges/djangoproject120x25_grey.gif" 
-		border="0" alt="A Django project." title="A Django project." /></a>
+		 alt="A Django project." title="A Django project." /></a>
 	  </div>
  </div>
 </footer>
