@@ -91,8 +91,8 @@ $(document).ready(function() {
 {% block contentBottom %} {# Taille du bloc 498px #}
  {% load static %} 
  {# {{ip}} #}
- <h2 align="center" >{% trans "Disponiblités pour l'appartement Martnà" %}</h2>
-<div align="center" id="reservationMartna"></div> </br>
+ <h2 style="text-align:center;">{% trans "Disponiblités pour l'appartement Martnà" %}</h2>
+<div style="text-align:center;" id="reservationMartna"></div> <br/>
 	{% comment %}
 	<h1> Liste des jours verrouilles</h1>
 	{% if lockedDatesMartna %}
@@ -105,9 +105,9 @@ $(document).ready(function() {
 	<p> Pas de jours verrouillés</p>
 	{% endif %}
 	{% endcomment %}
-  <h2 align="center" > {% trans "Disponiblités pour l'appartement Djan é Glyâmo" %} </h2>
-<div align="center" id="reservationDjanEGlyamo"></div>
+  <h2 style="text-align:center;"> {% trans "Disponiblités pour l'appartement Djan é Glyâmo" %} </h2>
+<div style="text-align:center;" id="reservationDjanEGlyamo"></div>
  
- <div align="center" id="reservationLink"> <a href="{% url 'website.views.contact' %}#id_purpose"> <i class="fa fa-calendar"></i> {% trans "Faire une demande de réservation" %} </a> </div>
+ <div style="text-align:center;" id="reservationLink"> <a href="{% url 'website.views.contact' %}#id_purpose"> <i class="fa fa-calendar"></i> {% trans "Faire une demande de réservation" %} </a> </div>
  
  {% endblock %}  

@@ -1,17 +1,17 @@
 
 
 html{ height:100%;background-color:#663333;/*brown */;color: #FFFFFF;font-family: Arial;text-decoration: none; }
-body {margin-bottom:0 px;width:100%;height:100%;margin: auto; }
+body {width:100%;height:100%;margin: auto; }/* margin-bottom:0 px; */
 #bodyWrapped{margin: auto;width: 950px;}
 
-h3{font-size: 16px;text-decoration: bold;}
-h1{font-size: 21px;text-decoration: bold;}
-h2{font-size: 18px;text-decoration: bold;}
+h3{font-size: 16px;font-weight:bold;}
+h1{font-size: 21px;font-weight:bold}
+h2{font-size: 18px;font-weight:bold}
 p{font-size: 13px;}
-em{font-size: 12px;text-decoration: italic;}
+em{font-size: 12px;font-style: italic;}
 
 /*********************************** style for the advertisement block **********************************/
-.pub{font-size: 16px;color: #F1CC99;font-family: Arial;text-align: center;margin-bottom:30px;margin-top:7px;width: 950px;font-weight:none;}
+.pub{font-size: 16px;color: #F1CC99;font-family: Arial;text-align: center;margin-bottom:30px;margin-top:7px;width: 950px;}
 /*border-bottom: 1px solid white;padding-bottom:15px;*/
 
 /***************************************** To avoid dirty links *****************************************/
@@ -31,8 +31,7 @@ a:active{text-decoration:none;color: #FFFFFF;}
 .legende{font-size: 11px;color: #F1CC99;text-align:center;}
 #titreNouvelle{border-top: 1px solid white;text-align: center;margin-top:15px;} /* separation between sections and news*/
 .maxiNouvelle{border-top: 1px solid white;}
-.maxiNouvelle >a> h2{text-align: center;font-size: 16px;color: #FFFFFF;font-style:normal;font-weight:bold;text-decoration: bold;
-					 font-family: Arial;}
+.maxiNouvelle >a> h2{text-align: center;font-size: 16px;color: #FFFFFF;font-style:normal;font-weight:bold;font-family: Arial;}
 					 
 a.linkMain{font-size: 13px;color: #F1CC99;text-decoration: none;font-family: Georgia;}/*blue : #99CCFF*/
 a.linkMain:hover{text-decoration: underline;}
@@ -42,7 +41,7 @@ a.linkMain:hover{text-decoration: underline;}
 nav{border-top: 1px solid white;width:179px;list-style: none;}
 nav > ul{padding:0; margin:0;list-style-type: none;}
 a.actif, a.inactif{text-decoration: none;display: block;padding-bottom: 7px;padding-left: 0px;padding-top :7px;
-					padding-right: 0px;padding-left:5px;font-size:16 px }
+					padding-right: 0px;padding-left:5px;font-size:16px ;}
 a.actif:hover, .inactif:hover{background-color: #F1CC99;/* Beige*/color: #663333;/* Marron*/}
 a.actif{color: #663333;background-color: #FFFFFF;}
 a.inactif{color : #FFFFFF}
