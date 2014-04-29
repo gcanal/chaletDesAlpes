@@ -13,42 +13,40 @@
     <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
 {% block head %} {# if we want to personalize the head tag in other templates #} {% endblock %}
 </head>
-
-<script >
-$(function() {
-    // Stick the #nav to the top of the window
-    var nav = $('nav');
-    var navHomeY = nav.offset().top;
-    var isFixed = false;
-    var $w = $(window);
-    
-    $w.scroll(function() {
-        var scrollTop = $w.scrollTop();
-        var shouldBeFixed = scrollTop > navHomeY;
-        var isScrollPossible=$w.height() > nav.height();
-        if (shouldBeFixed && !isFixed && isScrollPossible) {
-            nav.css({
-                position: 'fixed',
-                top: 0,
-                left: nav.offset().left,
-                width: nav.width()
-            });
-            isFixed = true;
-        }
-        else if (!shouldBeFixed && isFixed )
-        {
-            nav.css({
-                position: 'static'
-            });
-            isFixed = false;
-        }
-    });
-});
-
-</script>
-
 <body>
-<!--<div id="bodyWrapped"> -->
+	
+	<script >
+	$(function() {
+	    // Stick the #nav to the top of the window
+	    var nav = $('nav');
+	    var navHomeY = nav.offset().top;
+	    var isFixed = false;
+	    var $w = $(window);
+	    
+	    $w.scroll(function() {
+	        var scrollTop = $w.scrollTop();
+	        var shouldBeFixed = scrollTop > navHomeY;
+	        var isScrollPossible=$w.height() > nav.height();
+	        if (shouldBeFixed && !isFixed && isScrollPossible) {
+	            nav.css({
+	                position: 'fixed',
+	                top: 0,
+	                left: nav.offset().left,
+	                width: nav.width()
+	            });
+	            isFixed = true;
+	        }
+	        else if (!shouldBeFixed && isFixed )
+	        {
+	            nav.css({
+	                position: 'static'
+	            });
+	            isFixed = false;
+	        }
+	    });
+	});
+	</script>
+
 <div id="bodyWrapped">
 	
 	
