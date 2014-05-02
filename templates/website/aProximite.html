@@ -1,10 +1,15 @@
- {% extends "website/home.html"%}
+{% extends "website/home.html"%}
+{% load i18n %}
 {# template aProximite#}
 
 {% comment %}
 {% block pub %}	
 {% endblock %}
 {% endcomment %}
+
+{% block title %} {% trans "À proximité - Chalet Djan é Glyâmo" %}{% endblock %}
+{% block description %}{% trans "À proximité du chalet Djan é Glyâmo" %}{% endblock %}
+{% block keywords %}{% trans "Chalet Djan é Glyâmo, Tarentaise, Val d'Isère, Tignes, Les Arcs, La Plagne, Randonnée," %}{% endblock %}
 
 {% block content %} {# Taille du bloc 498px #}
  {% load static %} 

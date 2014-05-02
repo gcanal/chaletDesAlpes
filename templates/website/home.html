@@ -8,13 +8,20 @@
    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
    {# <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet" media="screen"> Fuck le bootstrap #}
    <link href="{{ STATIC_URL }}css/robert.css" rel="stylesheet" media="screen"> 
-   <title>{% block title %} {% trans "Chalet Djan e Glyâmo" %} {% endblock %}</title>
+   <title>{% block title %} {% trans "Chalet Djan é Glyâmo" %}{% endblock %} </title> 
+   <meta name="description" content="{% block description %} {% trans "Locations d'appartements à la semaine " %}{% endblock %}" /> 
+   <meta name="keywords" content="{% block keywords %}
+    {% trans "location, appartement, semaine, Bourg Saint Maurice, Les Arcs, La Plagne, ski de randonnée, beaufortain, chalet, Alpes " %}
+    {% endblock %} " />
+   
     <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
     <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
 {% block head %} {# if we want to personalize the head tag in other templates #} {% endblock %}
+
+
+
 </head>
 <body>
-	
 	<script >
 	$(function() {
 	    // Stick the #nav to the top of the window
@@ -46,6 +53,8 @@
 	    });
 	});
 	</script>
+
+
 
 <div id="bodyWrapped">
 	
@@ -91,8 +100,6 @@
 			<li ><a class={{pageId|isActive:7}} href="{% url 'website.views.pourVenir' %}">{% trans "Pour venir au chalet" %}</a></li>
 			<li ><a class={{pageId|isActive:8}} href="{% url 'website.views.reservations' %}">{% trans "Réservations" %}</a></li>
 			<li ><a class={{pageId|isActive:9}} href="{% url 'website.views.contact' %}">{% trans "Contact" %}</a></li>
-			{# {% if perms.nouvelles.add_section %} #}
-			{#<li ><a class={{pageId|isActive:10}} href="{% url 'website.views.creationSection' %}">Créer un section</a></li>{% endif %}#}
 			{% if perms.nouvelles.add_nouvelle %}
 			<li ><a class={{pageId|isActive:11}} href="{% url 'nouvelles.views.createNouvelle' %}">Créer une nouvelle</a></li> {% endif %}
 			{% if perms.website.add_lockedDate %}

@@ -1,5 +1,10 @@
- {% extends "website/home.html"%}
+{% extends "website/home.html"%}
+{% load i18n %}
 {# template AppartementGlyamo #}
+
+{% block title %} {% trans "Appartement Mestyé - Chalet Djan é Glyâmo" %}{% endblock %}
+{% block description %}{% trans "L'appartement Mestyé du chalet Djan é Glyâmo" %}{% endblock %}
+{% block keywords %}{% trans "chalet Djan é Glyâmo, Appartement, Mestyé, " %}{% endblock %}
 
 {% comment %}
 {% block pub %}	

@@ -1,5 +1,6 @@
- {% extends "website/home.html"%}
+{% extends "website/home.html"%}
 {# 404 error #}
+{% load i18n %}
 
 {% block pub %}	
 {% endblock %}
@@ -7,10 +8,11 @@
 
 {% block content %} {# Taille du bloc 498px #}
  {% load static %} 
-<h1> Erreur 404 </h1>
-<p>La page demandée n'a pu être trouvée</p>
-<p> Veuillez accepter nos humbles excuses pour les torts occasionés par cette impardonnable preuve d'incompétence de 
-notre part </p>
+<h1> {% trans "Erreur 404" %} </h1>
+<p>{% trans " La page demandée n'a pu être trouvée" %}</p>
+<p>
+	{% trans "Veuillez accepter nos humbles excuses pour les torts occasionés par cette impardonnable preuve d'incompétence de notre part" %} 
+</p>
 {% endblock %}
  
 {% block nouvelles %}

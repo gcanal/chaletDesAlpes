@@ -120,7 +120,7 @@ class ContactForm(forms.Form):
 	purpose=forms.ChoiceField(label=_("Vous voulez"),widget=forms.Select(),choices=((1, _("Faire une demande de réservation")),(0, _("Écrire un poème"))),);
 	firstName=forms.CharField(label=_("Prénom (facultatif)"),required=False,max_length=100);
 	lastName=forms.CharField(label=_("Nom (facultatif)"),required=False,max_length=100);
-	appartementSelection=forms.ChoiceField(label=_("Appartement "),widget=forms.Select(),choices=((1,_(u"DjanEGlyamo")),(3, _(u"Martnà"))),);
+	appartementSelection=forms.ChoiceField(label=_("Appartement "),widget=forms.Select(),choices=((1,_(u"Djan é Glyâmo")),(3, _(u"Martnà"))),);
 	startDate= forms.DateField(required=False,label=_("Début de la période"),widget=forms.TextInput(attrs={'id' : 'startDate'}));
 	endDate= forms.DateField(required=False,label=_("Fin de la période"),widget=forms.TextInput(attrs={'id' : 'endDate'}));
 	subject = forms.CharField(label=_("Sujet (facultatif)"),required=False,max_length=100);

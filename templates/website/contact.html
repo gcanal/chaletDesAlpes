@@ -1,6 +1,13 @@
 {% extends "website/home.html"%}
 {% load i18n %}
 {# template contact#}
+
+{# ####### Balises d'en-tête ####### #}
+{% block title %} {% trans "Contact - Chalet Djan é Glyâmo" %}{% endblock %}
+{% block description %}{% trans "Contactez-nous!" %}{% endblock %}
+{% block keywords %}{% trans "Contacter, Écrire, Réserver, Chalet Djan é Glyâmo" %}{% endblock %}
+
+
  {% load static %} 
 {% block head %} 
 <link href="{% static 'jquery-ui-1.10.4.custom/css/custom-theme/jquery-ui-1.10.4.custom.css' %}" rel="stylesheet">

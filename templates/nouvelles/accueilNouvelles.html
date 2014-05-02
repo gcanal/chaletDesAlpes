@@ -1,9 +1,15 @@
  
-  {% extends "website/home.html"%}
+{% extends "website/home.html"%}
+{% load i18n %}
 {# template nouvelles/accueilNouvelles #}
 {% load i18n %}
 {% block pub %}	
 {% endblock %}
+
+{% block title %} {% trans "Nouvelles - Chalet Djan é Glyâmo" %} {% endblock %}
+{% block description %}{% trans "Les dernières nouvelles du chalet Djan é Glyâmo" %}{% endblock %}
+{% block keywords %}{% trans "Chalet Djan é Glyâmo, Nouvelles, Blog, Chalet Des Alpes" %}{% endblock %}
+
 
 {% block content %} {# Taille du bloc 498px #}
 

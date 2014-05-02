@@ -2,6 +2,10 @@
 {# template lireNouvelle #}
 {#Page affichant une nouvelle a la fois#}
 
+{# ####### Balises d'en-tête ####### #}
+{% block title %} {{ nouvelle.titre }} {% endblock %}
+{% block description %}{{ nouvelle.resume }}{% endblock %}
+{% block keywords %}{% trans "Chalet Djan é Glyâmo, Nouvelles, Blog, Chalet des alpes " %}{% endblock %}
 
 {% block pub %}	
 {% endblock %}
@@ -16,13 +20,18 @@
 <p class="infos">  {% trans "le" %} {{ nouvelle.date|date:"DATE_FORMAT" }}</p>  {#Rédigé par {{ nouvelle.auteur }}, #}
 
 <div class="contenu">{{ nouvelle.contenu|linebreaks }}</div>
- <a href="{% url 'website.views.modifyNouvelleText' nouvelle.id %}" >
-   <button>Modifier le texte de la nouvelle</button>
-<a href="{% url 'website.views.modifyNouvelleImage' nouvelle.id %}" >
-	<button>Changer image</button></a>
 
+{% if perms.nouvelles.change_nouvelle %}
+ <a href="{% url 'website.views.modifyNouvelleText' nouvelle.id %}" >
+   <button>Modifier le texte de la nouvelle</button> </a> 
+<a href="{% url 'website.views.modifyNouvelleImage' nouvelle.id %}" >
+	<button>Changer image</button></a> {% endif %}
+	
+{% if perms.nouvelles.delete_nouvelle %}
 <a href="{% url 'website.views.deleteNouvelle' nouvelle.id %}" >
 	<button>Supprimer nouvelle</button></a>
+{% endif %}
+
 {% endblock %}
  
 {% block nouvelles %}

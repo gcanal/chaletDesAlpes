@@ -1,5 +1,11 @@
- {% extends "website/home.html"%}
+ 
+{% extends "website/home.html"%}
+{% load i18n %}
 {# template AppartementMartna#}
+
+{% block title %} {% trans "Appartement Martnà - Chalet Djan é Glyâmo" %}{% endblock %}
+{% block description %}{% trans "L'appartement Martnà du  chalet Djan é Glyâmo" %}{% endblock %}
+{% block keywords %}{% trans "chalet Djan é Glyâmo, Appartement, Martnà," %}{% endblock %}
 
 {% comment %}
 {% block pub %}	
