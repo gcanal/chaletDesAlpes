@@ -18,9 +18,8 @@ urlpatterns = patterns('',
 urlpatterns += i18n_patterns('',
     url(r'^accueil/$', 'website.views.home'),
     url(r'^$', 'website.views.home'),
-    url(r'^website/', include('website.urls')),
-    url(r'^nouvelles/', include('nouvelles.urls')),
-      
+    url(r'^chalet/', include('website.urls')),
+    url(r'^nouvelles/', include('nouvelles.urls')),    
 )
 
 urlpatterns += patterns('',
