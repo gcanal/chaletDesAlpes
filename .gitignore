@@ -6,7 +6,7 @@
 *.swp
 *.pid
 .directory
-
+google*
 #python files
 settings.py
 settings_server.py
