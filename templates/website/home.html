@@ -22,10 +22,8 @@
 	{% with nTranslated=pageId|translatedSections %}
 	{% if sections.count < 1  %}
 		<meta name="ROBOTS" content="NOINDEX, NOFOLLOW" />
-		<p> coucou</p>
 	{% elif LANGUAGE_CODE == 'en' and ntranslated < 1 %}
 		<meta name="ROBOTS" content="NOINDEX, NOFOLLOW" />
-		<p>coucou2</p>
 	{% endif %}
 	{% endwith %}
 {% endif %}
