@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^i18n/', include('django.conf.urls.i18n')),#not  within i18n_patterns() - it needs to be language-independent 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt',  content_type='text/plain')),
+    url(r'^google6118cccce9daba10\.html$', TemplateView.as_view(template_name='google6118cccce9daba10.html',  content_type='text/plain')),
 )
 
 urlpatterns += i18n_patterns('',
