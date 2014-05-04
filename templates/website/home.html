@@ -17,8 +17,17 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
     <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
 {% block head %} {# if we want to personalize the head tag in other templates #} {% endblock %}
-
-
+{# to prevent the indexation of low-content pages #}
+{% if pageId < 8 and pageId != None %}
+	{% if sections.count < 1  %}
+		<meta name="ROBOTS" content="NOINDEX, NOFOLLOW" />
+	{% endif %}
+	{% with nTranslated=pageId|translatedSections %}
+	{% if LANGUAGE_CODE == 'en' and ntranslated < 1 %}
+		<meta name="ROBOTS" content="NOINDEX, NOFOLLOW" />
+	{% endif %}
+	{% endwith %}
+{% endif %}
 
 </head>
 <body>

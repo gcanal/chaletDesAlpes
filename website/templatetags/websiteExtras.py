@@ -3,6 +3,7 @@ from django import template
 from django.core.serializers import serialize
 from django.db.models.query import QuerySet
 from django.utils import simplejson
+from website.models import Section
 
 register = template.Library()
 #To be a valid tag library, the module must contain a module-level variable named register that is a template.Library instance,
@@ -41,6 +42,12 @@ def isActive(value,arg):
 	else:
 		return 'inactif'
 		
+#returns the number of translated sections on a given page
+@register.filter
+def translatedSections(pageId):
+	pageId=int(pageId);
+	return Section.objects.filter(pageId=pageId, translated=True).count
+	
 @register.filter				
 def pageIdToView(pageId):
 	pageId=int(pageId);
