@@ -36,7 +36,7 @@ def render_from_pageId(request,pageIdAsked):
 	sections=Section.objects.filter(pageId=pageIdAsked).order_by('position');
 	nouvellesSection=Nouvelle.objects.filter(nouvellePageId=pageIdAsked)
 	dernieresNouvelles=Nouvelle.objects.order_by('-date')[:nouvelleCounter.counter]# latest Nouvelle Objects limitated to "counter"
-	#nNouvelles=min(dernieresNouvelles.count(),counter);#number of new that will be displayed on the page	
+	#nNouvelles=min(dernieresNouvelles.count(),counter);#number of news that will be displayed on the page	
 	
 	return render(request, pageIdToTemplate(pageIdAsked),locals(),context_instance=RequestContext(request))
 
@@ -418,7 +418,7 @@ def pageIdToTemplate(pageId):
 		return 'website/home.html'
 		
 viewsFromId={0: 'website.views.home',1: 'website.views.appartementDjanEGlyamo',2:'website.views.appartementMestye',
-3:'website.views.appartementMestye',4:'website.views.plusDuChalet',5:'website.views.coteCosy',6:'website.views.aProximite',
+3:'website.views.appartementMartna',4:'website.views.plusDuChalet',5:'website.views.coteCosy',6:'website.views.aProximite',
 7:'website.views.pourVenir',8:'website.views.reservations',9:'website.views.contact'}
 
 def view_from_pageId(pageId):
