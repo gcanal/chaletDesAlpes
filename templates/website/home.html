@@ -180,7 +180,7 @@
 			{% if LANGUAGE_CODE == 'fr' or nouvelle.translated  %} 
 				<div class="maxiNouvelle" id="{{nouvelle.id}}">
 					<a href="{% url 'nouvelles.views.read' nouvelle.id %}"> <h2> {{ nouvelle.titre }}</h2> </a>
-					<p class="infos">  le {{ nouvelle.date|date:"DATE_FORMAT" }}</p> 
+					<p class="infos">  date : {{ nouvelle.date|date:"DATE_FORMAT" }}</p> 
 					{% if nouvelle.image %} 
 						<p class="legende"><img alt="" src="{{MEDIA_URL}}{{ nouvelle.image }}" width="495"/>{{nouvelle.legende}}</p>
 					{% endif %}
