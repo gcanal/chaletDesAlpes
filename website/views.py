@@ -228,8 +228,9 @@ def deleteSection(request,pageIdAsked,positionAsked): #deletes the section of th
 	sec=Section.objects.filter(pageId=pageIdAsked).filter(position=positionAsked)
 	sec.delete()
 	sectionsFor=Section.objects.filter(pageId=pageIdAsked)
+	positionAsked=int(positionAsked)
 	for s in sectionsFor:
-		if s.position > int(positionAsked):
+		if s.position > positionAsked:
 			s.set_position(s.position-1)
 			s.save(update_fields=['position'])
 	#redirecting to the previous page		

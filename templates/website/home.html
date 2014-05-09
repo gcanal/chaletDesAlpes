@@ -135,7 +135,7 @@
 		{% if LANGUAGE_CODE == 'fr' or section.translated  %} {# if the section is not translated, we don' show it in the En version #}
 			<div class="section">
 				{% if section.titre %} <h3>{{ section.titre }}</h3> {% endif %}
-				{# <p>Je suis en position {{ section.position }}</p> #}
+				 <p>Je suis en position {{ section.position }}</p> 
 				{% if section.paragraphe %}{{ section.paragraphe|linebreaks }} {% endif %}
 				
 					<p><a href="{{section.link}}" class="linkMain"> {{section.linkText}}</a> </p>

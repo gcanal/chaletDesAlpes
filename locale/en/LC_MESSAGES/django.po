@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-02 12:30+0200\n"
+"POT-Creation-Date: 2014-05-09 23:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr ""
 msgid "le"
 msgstr "on"
 
-#: templates/nouvelles/NouvelleDisplay.html:23 templates/website/home.html:180
+#: templates/nouvelles/NouvelleDisplay.html:23 templates/website/home.html:188
 msgid "lien : "
 msgstr "link : "
 
@@ -84,8 +84,8 @@ msgid ""
 "Chalet Djan é Glyâmo, Tarentaise, Val d'Isère, Tignes, Les Arcs, La Plagne, "
 "Randonnée,"
 msgstr ""
-"Chalet Djan é Glyâmo, Chalet Djan e Glyamo, Tarentaise, Val d'Isère, Tignes, Les Arcs, La Plagne, "
-"Hiking,"
+"Chalet Djan é Glyâmo, Chalet Djan e Glyamo, Tarentaise, Val d'Isère, Tignes, "
+"Les Arcs, La Plagne, Hiking,"
 
 #: templates/website/appartementDjanEGlyamo.html:5
 msgid "Appartement Djan é Glyâmo"
@@ -165,64 +165,64 @@ msgid ""
 "location, appartement, semaine, Bourg Saint Maurice, Les Arcs, La Plagne, "
 "ski de randonnée, beaufortain, chalet, Alpes "
 msgstr ""
-"rent, apartment, week, Bourg Saint Maurice, Les Arcs, La Plagne, "
-"Ski touring, Beaufortain, chalet, Alpes"
+"rent, apartment, week, Bourg Saint Maurice, Les Arcs, La Plagne, Ski "
+"touring, Beaufortain, chalet, Alpes"
 
-#: templates/website/home.html:85
+#: templates/website/home.html:93
 msgid "Vos vacances en chalet traditionnel des Alpes - Locations toute l'année"
 msgstr ""
 "Take a holiday in a traditional alpine chalet - All seasons rental in the "
 "French Alps "
 
-#: templates/website/home.html:93
+#: templates/website/home.html:101
 msgid "Accueil"
 msgstr "Home"
 
-#: templates/website/home.html:94
+#: templates/website/home.html:102
 msgid "Appartement <br/> Djan é Glyâmo"
 msgstr "At Djan and Glyâmo's"
 
-#: templates/website/home.html:95
+#: templates/website/home.html:103
 msgid "Appartement Mestyé"
 msgstr "At Mestyé's "
 
-#: templates/website/home.html:96
+#: templates/website/home.html:104
 msgid "Appartement Martnà"
 msgstr "At Martnà's "
 
-#: templates/website/home.html:97
+#: templates/website/home.html:105
 msgid "Les plus du chalet"
 msgstr "Assets"
 
-#: templates/website/home.html:98
+#: templates/website/home.html:106
 msgid "Le côté cosy du chalet"
 msgstr "Le côté cosy"
 
-#: templates/website/home.html:99
+#: templates/website/home.html:107
 msgid "À proximité"
 msgstr "Close to us"
 
-#: templates/website/home.html:100
+#: templates/website/home.html:108
 msgid "Pour venir au chalet"
 msgstr "How to come"
 
-#: templates/website/home.html:101
+#: templates/website/home.html:109
 msgid "Réservations"
 msgstr "Booking"
 
-#: templates/website/home.html:102
+#: templates/website/home.html:110
 msgid "Contact"
 msgstr "Contact us"
 
-#: templates/website/home.html:169
+#: templates/website/home.html:177
 msgid "Dernières nouvelles  de la page"
 msgstr "Last news on this page"
 
-#: templates/website/home.html:216
+#: templates/website/home.html:224
 msgid "Pour en savoir plus"
 msgstr "See more"
 
-#: templates/website/home.html:246
+#: templates/website/home.html:254
 msgid "Haut"
 msgstr "Up"
 
@@ -281,11 +281,11 @@ msgstr "Available"
 
 #: templates/website/reservations.html:101
 msgid "Disponiblités pour l'appartement Martnà"
-msgstr "Availabilities at Martnà's"
+msgstr "Availabilities for the apartment Martnà"
 
 #: templates/website/reservations.html:116
 msgid "Disponiblités pour l'appartement Djan é Glyâmo"
-msgstr "Availabilities at Djan's"
+msgstr "Availabilities for the apartment Djan é Glyâmo"
 
 #: templates/website/reservations.html:119 website/forms.py:120
 msgid "Faire une demande de réservation"
