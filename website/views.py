@@ -22,6 +22,7 @@ from django.template import RequestContext
 #from django.utils.translation import ugettext as _#for i18n
 import locale
 from django.utils.encoding import smart_text
+from django.conf import settings
 
 
 
@@ -121,11 +122,11 @@ def contact(request):
 					m1+="\n\n************** Dates sélectionnées **************\n";
 					messageType="[Demande de résevation";
 					if (startDate and endDate):
-						#locale.setlocale(locale.LC_ALL, b"fr_FR.UTF-8");
-						m1+="from : "+startDate.strftime("%d (%A)/%m (%B)/%Y")+"\n";
-						m1+="to   : "+endDate.strftime("%d (%A)/%m (%B)/%Y")+"\n";
-						#m1+="début : "+smart_text(startDate.strftime("%A %d %B %Y"), encoding='utf-8',)+"\n";
-						#m1+="fin   : "+smart_text(endDate.strftime("%A %d %B %Y"), encoding='utf-8',)+"\n";
+						locale.setlocale(locale.LC_ALL, b"fr_FR.UTF-8");
+						#m1+="from : "+startDate.strftime("%d (%A)/%m (%B)/%Y")+"\n";
+						#m1+="to   : "+endDate.strftime("%d (%A)/%m (%B)/%Y")+"\n";
+						m1+="début : "+smart_text(startDate.strftime("%A %d %B %Y"), encoding='utf-8',)+"\n";
+						m1+="fin   : "+smart_text(endDate.strftime("%A %d %B %Y"), encoding='utf-8',)+"\n";
 					else:
 						m1+="Pas de dates sélectionnées \n"
 					m1+="\n************ Appartement sélectionné *************\n"+"Appartement "+appartString;
@@ -145,7 +146,7 @@ def contact(request):
 						m1+="to   : "+endDate.strftime("%d (%A)/%m (%B)/%Y")+"\n";
 					else:
 						m1+="You didn't choose any dates \n"
-					m1+="\n************** Apartment selected ***************\n"+"At "+appartString+'\'s \n';
+					m1+="\n************** Apartment selected ***************\n"+"Apartment "+appartString+' \n';
 					m1+="\n\n******************** Message ********************\n"
 				else:
 					messageType="[Poem";
@@ -157,13 +158,14 @@ def contact(request):
 			success=True;
 			#print subject;
 			#print message;
-			recipients = ['guillaume.canal@telecom-bretagne.eu',];
-			#recipients = ['gcanal@chalet-djan-e-glyamo.eu','jcanal@chalet-djan-e-glyamo.eu','mcanal@chalet-djan-e-glyamo.eu'];
-			from_adress='no-reply@chalet-djan-e-glyamo.eu';
-			send_mail(subject=subject, message=message, from_email=from_adress, recipient_list=recipients,fail_silently=False);
+			recipients = settings.EMAIL_RECIPIENTS;
+			from_adress=settings.FROM_ADRESS;
+			send_mail(subject=subject, message=message, from_email=from_adress, recipient_list=recipients,fail_silently=True);
+			# if the user requested a copy of the e-mail, we send it to him (alone)
 			if cc_myself:
-				recipients=[];recipients.append(sender);
-				send_mail(subject=subject, message=message, from_email=from_adress, recipient_list=recipients,fail_silently=False);
+				recipients=[];
+				recipients.append(sender);
+				send_mail(subject=subject, message=message, from_email=from_adress, recipient_list=recipients,fail_silently=True);
 			#return HttpResponseRedirect('website.views.home')
 	return render(request, 'website/contact.html',locals())
 
