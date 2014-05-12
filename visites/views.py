@@ -16,7 +16,6 @@ from django.template import RequestContext
 import locale
 from django.utils.encoding import smart_text
 from django.conf import settings
-from django.contrib.gis.utils import GeoIP # for ip geo-localization
 from visites.models import Visitor
 
 
