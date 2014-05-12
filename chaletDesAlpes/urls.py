@@ -21,6 +21,7 @@ urlpatterns += i18n_patterns('',
     url(r'^accueil/$', 'website.views.home'),
     url(r'^$', 'website.views.home'),
     url(r'^chalet/', include('website.urls')),
+    url(r'^visites/', include('visites.urls')),
     url(r'^nouvelles/', include('nouvelles.urls')),    
 )
 

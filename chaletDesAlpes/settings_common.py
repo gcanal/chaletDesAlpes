@@ -20,6 +20,9 @@ BASE_PATH = os.path.dirname(os.path.dirname(__file__))
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG 
 
+########################### GEOIP DIRECTORY ############################
+GEOIP_PATH=BASE_PATH +"/geoip/"
+
 
 ################################# EMAIL ################################
 #not defined in this file
@@ -115,6 +118,7 @@ INSTALLED_APPS = (
     'django.contrib.formtools',
     'django_cleanup', 
     'south',
+    'visites',
     'captcha', # used in website/forms.py to intall:pip install  django-simple-captcha 
 )
 

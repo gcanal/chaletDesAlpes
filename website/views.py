@@ -23,8 +23,9 @@ from django.template import RequestContext
 import locale
 from django.utils.encoding import smart_text
 from django.conf import settings
-
-
+#from django.contrib.gis.utils import GeoIP # for ip geo-localization
+from django.contrib.gis.geoip import GeoIP
+from visites.models import Visitor
 
 
 def activate(request, lan,pageId):
@@ -42,7 +43,23 @@ def render_from_pageId(request,pageIdAsked):
 	return render(request, pageIdToTemplate(pageIdAsked),locals(),context_instance=RequestContext(request))
 
 def home(request):
+	#we record the ip adress for our visit counter
+	g = GeoIP()
+	ip = request.META.get('REMOTE_ADDR', None);country="";city="";
+	print ip;
+	if ip:
+		if g.city(ip):
+			city = g.city(ip)['city'];
+			country=g.city(ip)['country_name'];
+		if country==None or country=="":
+			country="inconnu"
+		if city==None or city=="":
+			city="inconnu"
+		visitor,info = Visitor.objects.get_or_create(ip=ip,city=city,country=country,defaults={'visitCounter': 0});
+		visitor.update();
 	return render_from_pageId(request,0)
+	
+	
 def appartementDjanEGlyamo(request):
 	return render_from_pageId(request,1)
 def appartementMestye(request):

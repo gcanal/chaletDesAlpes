@@ -113,7 +113,9 @@
 			{% if perms.website.add_lockedDate %}
 			<li ><a class={{pageId|isActive:15}} href="{% url 'website.views.calendrier' 3 %}">Calendrier Martnà</a></li> {% endif %}
 			{% if perms.website.add_lockedDate %}
-			<li ><a class={{pageId|isActive:16}} href="{% url 'website.views.calendrier' 1 %}">Calendrier <br/> Djan é Glyâmo</a></li> {% endif %}			
+			<li ><a class={{pageId|isActive:16}} href="{% url 'website.views.calendrier' 1 %}">Calendrier <br/> Djan é Glyâmo</a></li> {% endif %}
+			{% if perms.visites.add_visitor %}
+			<li ><a class={{pageId|isActive:17}} href="{% url 'visites.views.dernieresvisites' %}">Visites</a></li> {% endif %}			
 		</ul>
 	</nav>
 	</div>

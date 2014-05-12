@@ -22,6 +22,9 @@ media/imagesSections/*
 #collected static file
 static_collected/*
 
+#heavy files
+GeoLiteCityv6.dat
+GeoIPv6.dat
 
 #notes : 
 # Il est possible d'ignorer les répertoires et les fichiers d'un répertoire.

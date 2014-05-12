@@ -126,7 +126,7 @@ msgstr "Mestyé,  Chalet Djan é Glyâmo"
 
 #: templates/website/contact.html:6
 msgid "Contact - Chalet Djan é Glyâmo"
-msgstr "Contact us - Chalet Djan é Glyâmo"
+msgstr "Contact us - Chalet Djan é Glyâmo"	
 
 #: templates/website/contact.html:7
 msgid "Contactez-nous!"

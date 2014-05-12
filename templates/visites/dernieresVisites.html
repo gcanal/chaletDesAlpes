@@ -1,0 +1,43 @@
+{% extends "website/home.html"%}
+{% load i18n %}
+{# template dernieresVisites#}
+
+{% comment %}
+{% block pub %}	
+{% endblock %}
+{% endcomment %}
+
+{% block title %} Les dernières visites{% endblock %}
+{% block description %}Les dernières visites{% endblock %}
+{% block keywords %}{% endblock %}
+
+{% block content %} {# Taille du bloc 498px #}
+ {% load static %} 
+ 
+ 
+ <h3> Nombre de visiteurs </h3>
+ <p>total : {{total}}</p>
+ 
+ <h3>Derniers visiteurs </h3>
+ 
+ <table style="width:495px">
+<tr>
+  <td>Ip</td>
+  <td>Ville</td>
+  <td>Pays</td>
+  <td>Visites</td>
+  <td>Dernière visite</td>
+</tr>
+{% for visitor in visitors %}
+<tr>
+  <td>{{visitor.ip}}</td>
+  <td>{{visitor.city}}</td>
+  <td>{{visitor.country}}</td>
+  <td>{{visitor.visitCounter}}</td>
+  <td>{{visitor.lastVisit}}</td>
+</tr>
+{% endfor %}
+
+</table> 
+
+ {% endblock %}  
