@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-10 23:02+0200\n"
+"POT-Creation-Date: 2014-05-13 22:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: chaletDesAlpes/settings_common.py:50
+#: chaletDesAlpes/settings_common.py:53
 msgid "French"
 msgstr "Français"
 
-#: chaletDesAlpes/settings_common.py:51
+#: chaletDesAlpes/settings_common.py:54
 msgid "English"
 msgstr "English"
 
@@ -47,7 +47,7 @@ msgstr ""
 msgid "le"
 msgstr "on"
 
-#: templates/nouvelles/NouvelleDisplay.html:23 templates/website/home.html:188
+#: templates/nouvelles/NouvelleDisplay.html:23 templates/website/home.html:190
 msgid "lien : "
 msgstr "link : "
 
@@ -126,7 +126,7 @@ msgstr "Mestyé,  Chalet Djan é Glyâmo"
 
 #: templates/website/contact.html:6
 msgid "Contact - Chalet Djan é Glyâmo"
-msgstr "Contact us - Chalet Djan é Glyâmo"	
+msgstr "Contact us - Chalet Djan é Glyâmo"
 
 #: templates/website/contact.html:7
 msgid "Contactez-nous!"
@@ -200,29 +200,29 @@ msgstr "Le côté cosy"
 
 #: templates/website/home.html:107
 msgid "À proximité"
-msgstr "Close to us"
+msgstr "Nearby attractions"
 
 #: templates/website/home.html:108
 msgid "Pour venir au chalet"
-msgstr "How to come"
+msgstr "Come to us"
 
 #: templates/website/home.html:109
 msgid "Réservations"
-msgstr "Booking"
+msgstr "Reservation"
 
 #: templates/website/home.html:110
 msgid "Contact"
 msgstr "Contact us"
 
-#: templates/website/home.html:177
+#: templates/website/home.html:179
 msgid "Dernières nouvelles  de la page"
 msgstr "Last news on this page"
 
-#: templates/website/home.html:224
+#: templates/website/home.html:226
 msgid "Pour en savoir plus"
 msgstr "See more"
 
-#: templates/website/home.html:254
+#: templates/website/home.html:256
 msgid "Haut"
 msgstr "Up"
 
@@ -249,6 +249,10 @@ msgstr "Chalet Djan e Glyâmo - How to Come ?"
 #: templates/website/pourVenir.html:7
 msgid "Chalet Djan é Glyâmo,Savoie, Alpes,  Venir, Itinéraire, Plan, Carte"
 msgstr "Chalet Djan é Glyâmo,Savoy, Alps, France, Come, Plan, Map, Directions"
+
+#: templates/website/pourVenir.html:18
+msgid "Trouvez nous sur google maps"
+msgstr "Find us on google maps"
 
 #: templates/website/reservations.html:6
 msgid "Réservations - Chalet Djan é Glyâmo"
