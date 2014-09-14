@@ -39,7 +39,7 @@ def page(request, idCategoryAsked):
 	#articles=Article.objects.filter(category=categoryAsked).order_by('date');
 	#return render(request, pageIdToTemplate(pageIdAsked),locals(),context_instance=RequestContext(request))
 	
-
+@permission_required("perms.website.add_section")
 def addArticle(request):
 	categories=Category.objects.all();
 	if request.method=='POST':
@@ -60,7 +60,8 @@ def addArticle(request):
 		displayForm=True;
 		form=ArticleForm()
 	return render(request, 'blog/blogForm.html',locals())
-		
+	
+@permission_required("perms.website.add_section")		
 def addCategory(request):
 	categories=Category.objects.all();
 	addCategory=True;
@@ -77,7 +78,7 @@ def addCategory(request):
 	else:
 		form=CategoryForm()
 	return render(request, 'blog/blogForm.html',locals())		
-			
+@permission_required("perms.website.change_section")			
 def renameCategory(request,idCategory):
 	categories=Category.objects.all();
 	cat=Category.objects.get(id=idCategory)
@@ -93,7 +94,7 @@ def renameCategory(request,idCategory):
 		form=CategoryForm(initial={'title': cat.title,})
 	return render(request, 'blog/blogForm.html',locals())
 
-@permission_required("perms.blog.change_article")		
+@permission_required("perms.website.change_section")		
 def modifyArticleText(request,idAsked):#modifies the section of the given pageId in the given position
 	categories=Category.objects.all();
 	textModification=True;
@@ -110,7 +111,7 @@ def modifyArticleText(request,idAsked):#modifies the section of the given pageId
 		form=ArticleTextForm(title=art.title,paragraph=art.paragraph,caption=art.caption,link=art.link,linkText=art.linkText)	 
 		return render(request,'blog/blogForm.html',locals())
 
-@permission_required("perms.blog.change_article")		 
+@permission_required("perms.website.change_section")		 
 def modifyArticleImage(request,idAsked):
 	categories=Category.objects.all();
 	imageModification=True # flag for the template
@@ -126,13 +127,14 @@ def modifyArticleImage(request,idAsked):
 		form=ArticleImageForm()	 
 		return render(request,'blog/blogForm.html',locals())
 			
-@permission_required("perms.blog.delete_article")		
+@permission_required("perms.website.delete_section")		
 def deleteArticle(request,idAsked): #deletes the section of the given pageId in the given position
 	categories=Category.objects.all();
 	art=Article.objects.filter(id=idAsked)
 	art.delete()
 	return home(request)
 	
+@permission_required("perms.website.delete_section")	
 def deleteCategoryWithConfirmation(request, idAsked):
 	categories=Category.objects.all();
 	idCategory=idAsked;
@@ -142,6 +144,7 @@ def deleteCategoryWithConfirmation(request, idAsked):
 	return render(request,'blog/blogForm.html',locals())
 	
    ############## here TODO understand why category.title does not appear in the template ##############
+@permission_required("perms.website.delete_section")
 def deleteCategory(request, idAsked):
 	categories=Category.objects.all();
 	idAsked=int(idAsked);

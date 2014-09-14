@@ -43,11 +43,11 @@
 		<img alt="{{ article.caption }}" src="{{MEDIA_URL}}{{ article.image }}" width="495"/>
 		<div class="legende">{{ article.caption}}</div>
 	{% endif %}
-	{% if perms.blog.change_article %}
+	{% if perms.website.change_section %}
 			<a href="{% url 'blog.views.modifyArticleText' article.id %}" > <button>Modifier texte </button>
 			<a href="{% url 'blog.views.modifyArticleImage' article.id %}" > <button>Modifier image</button></a>
 	{% endif %}
-	{% if perms.blog.delete_article %}
+	{% if perms.website.delete_section %}
 		<a href="{% url 'blog.views.deleteArticle' article.id  %}" ><button>Supprimer article</button></a>
 	{% endif %}
 	</div>
