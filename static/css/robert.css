@@ -1,77 +1,232 @@
+.ib, #nav-container, aside {
+  display: inline-block;
+  vertical-align: top; }
 
+html {
+  height: 100%;
+  background-color: #663333;
+  color: #FFFFFF;
+  font-family: Arial;
+  text-decoration: none; }
 
-html{ height:100%;background-color:#663333;/*brown */;color: #FFFFFF;font-family: Arial;text-decoration: none; }
-body {width:100%;height:100%;margin: auto; }/* margin-bottom:0 px; */
-#bodyWrapped{margin: auto;width: 950px;}
+body {
+  width: 100%;
+  height: 100%;
+  margin: auto; }
 
-h3{font-size: 16px;font-weight:bold;}
-h1{font-size: 21px;font-weight:bold}
-h2{font-size: 18px;font-weight:bold}
-p{font-size: 13px;}
-em{font-size: 12px;font-style: italic;}
+#bodyWrapped {
+  margin: auto;
+  width: 950px; }
 
-/*********************************** style for the advertisement block **********************************/
-.pub{font-size: 16px;color: #F1CC99;font-family: Arial;text-align: center;margin-bottom:30px;margin-top:7px;width: 950px;}
-/*border-bottom: 1px solid white;padding-bottom:15px;*/
+h1 {
+  font-size: 21px;
+  font-weight: bold; }
 
-/***************************************** To avoid dirty links *****************************************/
-a:link{ text-decoration: none ;color: #FFFFFF;}  
-a:visited {text-decoration:none;color: #FFFFFF;} 
-a:active{text-decoration:none;color: #FFFFFF;}
+h2 {
+  font-size: 18px;
+  font-weight: bold; }
+
+h3 {
+  font-size: 16px;
+  font-weight: bold; }
+
+p {
+  font-size: 13px; }
+
+em {
+  font-size: 12px;
+  font-style: italic; }
+
+/** Advertisement block */
+.pub {
+  font-size: 16px;
+  color: #f1cc99;
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 7px;
+  width: 498px; }
+
+/** To avoid dirty links */
+a:link {
+  text-decoration: none;
+  color: #FFFFFF; }
+
+a:visited {
+  text-decoration: none;
+  color: #FFFFFF; }
+
+a:active {
+  text-decoration: none;
+  color: #FFFFFF; }
 
 /********************************** style for the main (central) block **********************************/
 /***************************************** style for the header *****************************************/
-#languageSelector{text-align:right;}
-#language{font-size:13px;}
-#language:hover{color: #F1CC99;text-decoration:underline;/* Beige*/;font-size:15px;}
+#languageSelector {
+  text-align: right; }
+
+#language {
+  font-size: 13px; }
+
+#language:hover {
+  color: #f1cc99;
+  text-decoration: underline;
+  font-size: 16px; }
 
 /********************************** style for the main (central) block **********************************/
-#main{border-top: 1px solid white;text-align:justify;padding-left:0px;padding-right:0px;display:inline-block;
-		width:498px;vertical-align:top;margin-left:50px;margin-right:50px;}
-.legende{font-size: 11px;color: #F1CC99;text-align:center;}
-#titreNouvelle{border-top: 1px solid white;text-align: center;margin-top:15px;} /* separation between sections and news*/
-.maxiNouvelle{border-top: 1px solid white;}
-.maxiNouvelle >a> h2{text-align: center;font-size: 16px;color: #FFFFFF;font-style:normal;font-weight:bold;font-family: Arial;}
-					 
-a.linkMain{font-size: 13px;color: #F1CC99;text-decoration: none;font-family: Georgia;}/*blue : #99CCFF*/
-a.linkMain:hover{text-decoration: underline;}
-/************************************* style for the navigation menu ************************************/
-#nav-container{display:inline-block;vertical-align:top;margin-bottom: 20px;width:180px;}
+#main {
+  border-top: 1px solid white;
+  text-align: justify;
+  display: inline-block;
+  width: 498px;
+  vertical-align: top;
+  margin-left: 50px;
+  margin-right: 50px; }
 
-nav{border-top: 1px solid white;width:179px;list-style: none;}
-nav > ul{padding:0; margin:0;list-style-type: none;}
-a.actif, a.inactif{text-decoration: none;display: block;padding-bottom: 7px;padding-left: 0px;padding-top :7px;
-					padding-right: 0px;padding-left:5px;font-size:16px ;}
-a.actif:hover, .inactif:hover{background-color: #F1CC99;/* Beige*/color: #663333;/* Marron*/}
-a.actif{color: #663333;background-color: #FFFFFF;}
-a.inactif{color : #FFFFFF}
+.legende {
+  font-size: 11px;
+  color: #f1cc99;
+  text-align: center; }
+
+#titreNouvelle {
+  border-top: 1px solid white;
+  text-align: center;
+  margin-top: 15px; }
+
+.maxiNouvelle {
+  border-top: 1px solid white; }
+
+.maxiNouvelle > a > h2 {
+  text-align: center;
+  font-size: 16px;
+  color: #FFFFFF;
+  font-style: normal;
+  font-weight: bold;
+  font-family: Arial; }
+
+a.linkMain {
+  font-size: 13px;
+  color: #F1CC99;
+  text-decoration: none;
+  font-family: Georgia; }
+
+a.linkMain:hover {
+  text-decoration: underline; }
+
+/************************************* style for the navigation menu ************************************/
+#nav-container {
+  margin-bottom: 20px;
+  width: 180px; }
+
+nav {
+  border-top: 1px solid white;
+  border-right: 0px solid white;
+  border-bottom: 0px solid white;
+  border-left: 0px solid white;
+  width: 180px;
+  list-style: none; }
+
+nav > ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none; }
+
+a.actif, a.inactif {
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+  padding: 7px 0px 7px 6px;
+  font-size: 16px; }
+
+a.actif:hover, .inactif:hover {
+  background-color: #f1cc99;
+  color: #663333; }
+
+a.actif {
+  color: #663333;
+  background-color: #FFFFFF; }
+
+a.inactif {
+  color: #FFFFFF; }
+
+/***************************************** style for the top menu ****************************************/
+#top-menu > ul > li {
+  display: block; }
+
+#top-menu > ul {
+  display: inline-block; }
 
 /************************************** style for the aside block ***************************************/
-/* some properties (colour, backgroundcolour,font-family) are inherited from the the body selector */
-aside{display:inline-block;width:160px;vertical-align:top;}
-#headAside{padding-top:10px;padding-bottom:4px;border-top: 1px solid white;border-bottom: 1px solid white;}
-.miniNouvelle{border-bottom: 1px solid white;}
-a.linkAside{font-size: 11px;color: #99CCFF;text-decoration: none;font-family: Georgia;}
-a.linkAside:hover{text-decoration: underline;}
-.miniNouvelle h3{text-align: center;}
+aside {
+  width: 160px; }
+
+#headAside {
+  padding: 10px 0px 4px 0px;
+  border-top: 1px solid white;
+  border-right: 0px solid white;
+  border-bottom: 1px solid white;
+  border-left: 0px solid white; }
+
+.miniArticle {
+  border-bottom: 1px solid white; }
+
+a.linkAside {
+  font-size: 11px;
+  color: #99bef1;
+  text-decoration: none;
+  font-family: Georgia; }
+
+a.linkAside:hover {
+  text-decoration: underline; }
+
+.miniArticle h3 {
+  text-align: center; }
 
 /************************************** style for the footer block **************************************/
-footer{color:#FFFFFF;display:block;left: 0 ;right: 0;background-color:#664444;
-width:inherit; margin:auto;margin-top: 20px;
-} /* width 950px; width:100%; border-top: 1px solid white;*/
-.footerwrapper{margin: auto;width: 950px;}
-.footer1{display:inline-block;width:232.5px;vertical-align:top; text-align:center;margin:0px;
-margin-left:0px;margin-right:0px;padding-left:0px;padding-bottom:5px;padding-top:5px;}
+footer {
+  color: #FFFFFF;
+  display: block;
+  left: 0;
+  right: 0;
+  background-color: #664444;
+  width: inherit;
+  margin: auto;
+  margin-top: 20px; }
 
-/*border-right: 1px solid white;*/
+.footerwrapper {
+  margin: auto;
+  width: 950px; }
 
-#reservationLink{color:#664444;padding-top:10px; margin-top:20px;padding-bottom:10px; margin-bottom:10px;background-color: #F1CC99;}
-#reservationLink:hover{text-decoration: underline;}
-#reservationLink a{color:#664444;}
-#reservationLink a:hover{font-size:17px}
+.footer1 {
+  display: inline-block;
+  vertical-align: top;
+  width: 232.5px;
+  text-align: center;
+  padding: 5px 0px; }
 
+#reservationLink {
+  color: #664444;
+  background-color: #f1cc99;
+  padding: 10px 0px;
+  margin: 20px 0px 10px 0px; }
 
-#nouvelleCounter{margin-top:10px;margin-bottom:10px; padding-bottom:5px;padding-top:5px;border : 1px solid white;margin-top:10px;
-text-align:center;padding-left:2px;padding-right:2px;Line-Height:20px;}
-#nouvelleCounter:hover{background-color: #664444;}
-#nouvelleCounter>a:hover{color:#FFFFFF;}
+#reservationLink:hover {
+  text-decoration: underline; }
+
+#reservationLink a {
+  color: #664444; }
+
+#reservationLink a:hover {
+  font-size: 18px; }
+
+#nouvelleCounter {
+  border: 1px solid white;
+  text-align: center;
+  Line-Height: 20px;
+  margin: 10px 0px;
+  padding: 5px 2px; }
+
+#nouvelleCounter :hover {
+  background-color: #664444; }
+
+#nouvelleCounter > a:hover {
+  color: #FFFFFF; }

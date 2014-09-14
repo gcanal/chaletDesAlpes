@@ -3,29 +3,20 @@ from django.db import models
 from django.utils.translation import get_language
 #models for the application nouvelles
 
-
-
-class Nouvelle(models.Model):
-	nouvellePageId=models.PositiveIntegerField()
-	titre_fr = models.CharField(max_length=100)
-	titre_en = models.CharField(max_length=100)
-	resume_fr=models.CharField(max_length=100)
-	resume_en=models.CharField(max_length=100)
-	paragraphe_fr= models.TextField(null=True)
-	paragraphe_en= models.TextField(null=True)
-	image=models.ImageField(upload_to='imagesNouvelles/',null=True,blank=True)
-	legende_fr=models.CharField(max_length=100)
-	legende_en=models.CharField(max_length=100)
+#french only in the blog section
+class Article(models.Model):
+	title = models.CharField(max_length=100)
+	summary=models.CharField(max_length=100)
+	paragraph= models.TextField(null=True)
+	image=models.ImageField(upload_to='imagesBlog/',null=True,blank=True)
+	caption=models.CharField(max_length=100)
 	date = models.DateTimeField(auto_now_add=True, auto_now=False, verbose_name="Date de parution")
 	link=models.CharField(max_length=100)
-	linkText_fr=models.CharField(max_length=100)
-	linkText_en=models.CharField(max_length=100)
-	translated=models.BooleanField();
-	modifiedInFr=models.BooleanField();
-	
+	linkText=models.CharField(max_length=100)
+	category = models.ForeignKey('Category')
 	def __unicode__(self):
 		return u"%s" % self.titre
-	
+	"""
 	@property 
 	def titre(self):
 		if get_language() == 'fr':
@@ -56,3 +47,11 @@ class Nouvelle(models.Model):
 			return self.linkText_fr;
 		else:
 			return self.linkText_en;
+	"""
+
+class Category(models.Model):
+	title = models.CharField(max_length=100)
+	
+	def __unicode__(self):
+		return u"%s" % self.title
+	

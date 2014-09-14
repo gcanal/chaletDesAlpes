@@ -7,7 +7,6 @@ from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns
 from django.views.generic.base import TemplateView # for robots.txt
 
-
 admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^i18n/', include('django.conf.urls.i18n')),#not  within i18n_patterns() - it needs to be language-independent 
@@ -22,7 +21,7 @@ urlpatterns += i18n_patterns('',
     url(r'^$', 'website.views.home'),
     url(r'^chalet/', include('website.urls')),
     url(r'^visites/', include('visites.urls')),
-    url(r'^nouvelles/', include('nouvelles.urls')),    
+    url(r'^blog/', include('blog.urls')),    
 )
 
 urlpatterns += patterns('',

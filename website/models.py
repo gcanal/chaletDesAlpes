@@ -184,7 +184,7 @@ class Message(models.Model):
 	sender = models.EmailField();
 	cc_myself = models.BooleanField();
     
-class NouvelleCounter(models.Model):
+class ArticleCounter(models.Model):
 	pageId=models.PositiveSmallIntegerField();
 	counter=models.PositiveSmallIntegerField();
 	

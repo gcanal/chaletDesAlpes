@@ -1,0 +1,61 @@
+{% extends "base.html"%}
+{% load static %}
+{% load i18n %}
+{% load chaletDesAlpesExtras %}
+
+{% block nav %}	
+
+{# "{% url 'website.views.modifySectionText' pageId section.position 'fr'%}" #}
+
+{% for category in categories %}
+<li ><a class={{idCategoryAsked|isActiveInt:category.id}} href="{% url 'blog.views.page' category.id %}"> {{category.title}} </a></li>
+
+{% endfor %}
+
+<li ><a class={{addCategory|isActiveInt:1}} href="{% url 'blog.views.addCategory' %}"> Ajouter categorie</a></li>
+<li ><a class={{addArticle|isActiveInt:1}} href="{% url 'blog.views.addArticle' %}"> Ajouter un article de blog</a> </li>
+{% endblock %}
+
+{% block articles %}                                      
+
+
+
+{% if category != None %}
+{% if perms.blog.delete_category %}
+<form style="display:inline" action="{% url 'blog.views.deleteCategoryWithConfirmation' category.id  %}" >
+    <input type="submit" value="Supprimer la categorie : {{category}}">
+</form >
+<form style="display:inline" action="{% url 'blog.views.renameCategory' category.id  %}" >
+    <input type="submit" value="Renommer la categorie : {{category}}">
+</form >
+{% endif %}
+
+<div class="articles">
+{% for article in articles %}
+
+	<div id={{article.id}} >
+	{% if article.title %} <h3>{{ article.title }}</h3> {% endif %}
+	{% if article.paragraph %}<p> {{ article.paragraph|linebreaks }}</p> {% endif %}
+	{% if article.link %}			
+		<p><a href="{{article.link}}" class="linkMain"> {{article.linkText}}</a> </p>
+	{% endif %}			
+	{% if article.image %}
+		<img alt="{{ article.caption }}" src="{{MEDIA_URL}}{{ article.image }}" width="495"/>
+		<div class="legende">{{ article.caption}}</div>
+	{% endif %}
+	{% if perms.blog.change_article %}
+			<a href="{% url 'blog.views.modifyArticleText' article.id %}" > <button>Modifier texte </button>
+			<a href="{% url 'blog.views.modifyArticleImage' article.id %}" > <button>Modifier image</button></a>
+	{% endif %}
+	{% if perms.blog.delete_article %}
+		<a href="{% url 'blog.views.deleteArticle' article.id  %}" ><button>Supprimer article</button></a>
+	{% endif %}
+	</div>
+	
+{% endfor %}
+</div>
+
+{% endif %}
+{% endblock %}
+
+

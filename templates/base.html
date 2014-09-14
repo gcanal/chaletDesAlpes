@@ -1,0 +1,196 @@
+ {% load static %}
+{% load i18n %}
+{% load chaletDesAlpesExtras %} 
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+   <link href="{{ STATIC_URL }}css/robert.css" rel="stylesheet" media="screen"> 
+   <title>{% block title %} {% trans "Chalet Djan é Glyâmo" %}{% endblock %} </title> 
+   <meta name="description" content="{% block description %} {% trans "Locations d'appartements à la semaine " %}{% endblock %}" /> 
+   <meta name="keywords" content="{% block keywords %}
+    {% trans "location, appartement, semaine, Bourg Saint Maurice, Les Arcs, La Plagne, ski de randonnée, beaufortain, chalet, Alpes " %}
+    {% endblock %} " />
+   
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+{% block head %} {# if we want to personalize the head tag in other templates #} {% endblock %}
+{# to prevent the indexation of low-content pages #}
+
+</head>
+
+	<script >
+	$(function() {
+	    // Stick the #nav to the top of the window
+	    var nav = $('nav');
+	    var navHomeY = nav.offset().top;
+	    var isFixed = false;
+	    var $w = $(window);
+	    
+	    $w.scroll(function() {
+	        var scrollTop = $w.scrollTop();
+	        var shouldBeFixed = scrollTop > navHomeY;
+	        var isScrollPossible=$w.height() > nav.height();
+	        if (shouldBeFixed && !isFixed && isScrollPossible) {
+	            nav.css({
+	                position: 'fixed',
+	                top: 0,
+	                left: nav.offset().left,
+	                width: nav.width()
+	            });
+	            isFixed = true;
+	        }
+	        else if (!shouldBeFixed && isFixed )
+	        {
+	            nav.css({
+	                position: 'static'
+	            });
+	            isFixed = false;
+	        }
+	    });
+	});
+	</script>
+
+<body>
+	
+<div id="bodyWrapped">
+{##############################################################  HEADER #############################################################}	
+
+
+{% comment %}
+<menu id="top-menu">
+	{% block global-nav %}
+	<ul>
+		{# <li><a class={{pageId|isActive:0}} href="{% url 'website.views.home' %}">{% trans "Le chalet" %}</a></li> #}
+		<li><a class="active" href="{% url 'website.views.home' %}">{% trans "Le chalet" %}</a></li>
+		<li><a class="unactive" href="{% url 'blog.views.home' %}">{% trans "Blog" %}</a></li>
+		<li><a class="unactive" href="{% url 'blog.views.home' %}">{% trans "Ballades" %}</a></li>
+	</ul>
+	{% endblock %}	
+</menu>
+{% endcomment  %}
+ <header >
+ 
+	  {% block header-topImage %}
+	<p>
+	<a  href="{% url 'website.views.home' %}"><img src="{% static 'images/header2.png' %}" alt="" width="950" height="213"/></a>
+<!-- chalet_des_alpes_djan_e_gli2.png-->  
+   </p>
+   {% endblock %}
+   {% block header-languageSelector %}{% endblock %}
+</header>
+
+
+
+
+
+{% block pub %}	  {# To add additionnal top message #} {% endblock %}
+
+
+	
+
+{############################################################### NAV ################################################################}
+	<div id="nav-container">
+	<nav > 	
+		<ul>
+			{% block nav %}	
+			{% endblock %}				
+		</ul>
+	</nav>
+    </div>
+<div id="main">	
+{##########################################################      MAIN      ##########################################################}		 
+{% block content %} {# To place top content #} {% endblock %} 
+
+{% block sections %}                                      {% endblock %}
+
+{% block contentMiddle %}                                 {% endblock %}
+	
+{% block articles %}                                      {% endblock %} 
+{% block contentBottom %}                                 {% endblock %}
+
+</div>  <!--main -->
+
+
+{###########################################################   ASIDE  ###########################################################}
+{# aside article in french  (in every pages V1  - only chalet pages V2 #}
+
+	<aside  >
+		
+
+		
+{% block aside %}
+	<div id="headAside"> 
+		<a  href="{% url 'blog.views.home' %}"> <img src="{% static 'logos/imgNouvellesChaletDesAlpes.jpg' %}" alt="" width="160" /> </a>  <!--height="213" -->
+    </div>
+    
+	{% if lastArticles  %} 
+		{% for article in lastArticles %} {#  {% with view=nouvelle.nouvellePageId|pageIdToView %} #}
+				<div class=miniArticle>
+					<h3 >{{ article.title }}</h3>
+					{% if article.image %} <img alt="" src="{{MEDIA_URL}}{{ article.image }}" width="160"/> {% endif %}
+					<p><em>{{ article.summary }}</em></p>
+					<p><a class="linkAside" href="{% url 'blog.views.page' article.category.id %}#{{article.id}}">{% trans "Pour en savoir plus" %}</a> </p> 	
+				    {% comment %}
+						{% if perms.nouvelles.change_nouvelle %}
+							{% if not nouvelle.translated %} 
+								<a href="{% url 'nouvelles.views.read' nouvelle.id %}">  <p><strong> non traduit</strong> </a>
+							{% elif nouvelle.modifiedInFr %} 
+								<a href="{% url 'nouvelles.views.read' nouvelle.id %}"><p><strong> modifié en fr </strong></p> </a>
+							{% else %}
+								<a href="{% url 'nouvelles.views.read' nouvelle.id %}"><p><strong>accès nouvelle</strong></p> </a>
+							{% endif %}
+						{% endif %} 
+					 {% endcomment %}
+				</div>
+		{% endfor %}	
+	{% endif %} 
+{% endblock %}
+
+{% comment "no aside block at the moment" %} 
+
+{% block nouvelleCounter %}
+	{% if perms.website.change_nouvelleCounter %}
+		<div id=nouvelleCounter>
+			<a href="{% url 'website.views.articleCounter' pageId %}" ><i class="fa fa-arrows-v fa-lg"></i> changer le nombre de nouvelles affichées	 </a>
+		</div>
+	{% endif %}
+{% endblock %}
+
+
+
+{% endcomment %}		
+	</aside>
+	
+	
+
+	
+</div> <!--bodyWrapped -->
+
+
+{#############################################################  FOOTER ##############################################################}
+{% block footer %}
+<footer>
+ <div class="footerwrapper">
+	<div class="footer1"><a href="{% url 'website.views.home' %}" ><i class="fa fa-h-square fa-lg"></i> Homepage </a></div>
+	<div class="footer1"><a href="#bodyWrapped" ><i class="fa fa-arrow-circle-up fa-lg"></i>{% trans "Haut" %}</a></div>
+	<div class="footer1">
+		{% if user.is_authenticated %}
+		<a href="{% url 'website.views.deconnexion' %}" ><i class="fa fa-sign-out fa-lg"></i> Déconnexion </a>
+		{% else %}
+		<a href="{% url 'website.views.connexion' %}" ><i class="fa fa-sign-in fa-lg"></i> Administration</a>
+		{% endif %}
+	</div>
+	<div class="footer1">
+		<a href="http://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/badges/djangoproject120x25_grey.gif" 
+		 alt="A Django project." title="A Django project." /></a>
+	  </div>
+ </div>
+</footer>
+{% endblock %}
+
+</body> 
+</html>

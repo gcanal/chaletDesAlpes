@@ -1,0 +1,140 @@
+
+
+$font-stack:    Helvetica, sans-serif;
+$brown:#663333;
+$white:#FFFFFF;
+$brown_d:#664444;//deeper brown
+$pale_orange:#f1cc99;
+$pale_blue:#99bef1;
+
+$arial : Arial;
+$total_min_width: 950px;
+$main_min_width: 498px;
+$main_margin:50px;
+$aside_width:160px;
+$menu_witdh:180px;
+
+
+$h1_font : 21px;
+$h2_font : 18px;
+$h3_font : 16px;
+$p_font : 13px;
+$tiny_font : 11px;
+
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@mixin plain_link() {
+	text-decoration: none;
+    color: $white;
+}
+@mixin ib(){//shortcut for inline_block
+	display : inline-block; vertical-align : top;
+}
+.ib{
+	display : inline-block; vertical-align : top;
+}
+
+
+@mixin rect($top,$right,$bottom,$left){//shortcut for inline_block
+  border-top    : $top solid white;
+  border-right  : $right solid white;
+  border-bottom : $bottom  solid white;
+  border-left   : $left solid white;
+}
+
+
+html{ height:100%;background-color: $brown;color: $white ;font-family: Arial;text-decoration: none; }
+body {width:100%;height:100%;margin: auto; }
+#bodyWrapped{margin: auto; width: $total_min_width;} 
+
+h1{font-size: $h1_font;font-weight:bold}
+h2{font-size: $h2_font;font-weight:bold}
+h3{font-size: $h3_font;font-weight:bold;}
+p{font-size: $p_font}
+em{font-size: 12px;font-style: italic;}
+
+/** Advertisement block */
+.pub{font-size: $h3_font;color: $pale_orange ;text-align: center;margin-bottom:30px;margin-top:7px;width: $main_min_width;}
+
+
+/** To avoid dirty links */
+a:link{ @include plain_link();}  
+a:visited {@include plain_link();} 
+a:active{@include plain_link();}
+
+/********************************** style for the main (central) block **********************************/
+/***************************************** style for the header *****************************************/
+#languageSelector{text-align:right;}
+#language{font-size:$p_font}
+#language:hover{color: $pale_orange;text-decoration:underline;font-size:$h3_font}
+
+
+/********************************** style for the main (central) block **********************************/
+
+#main{border-top: 1px solid white;text-align:justify ; display:inline-block;
+		width:$main_min_width;vertical-align:top;margin-left:$main_margin;margin-right:$main_margin;}
+		
+		
+.legende{font-size: $tiny_font ;color: $pale_orange ;text-align:center;}
+
+#titreNouvelle{border-top: 1px solid white;text-align: center;margin-top:15px;}
+.maxiNouvelle{border-top: 1px solid white;}
+.maxiNouvelle >a> h2{text-align: center;font-size: 16px;color: $white; font-style:normal;font-weight:bold;font-family: Arial;}
+
+a.linkMain{font-size: 13px;color: #F1CC99;text-decoration: none;font-family: Georgia;}
+a.linkMain:hover{text-decoration: underline;}
+
+
+
+/************************************* style for the navigation menu ************************************/
+
+#nav-container{ @extend .ib ; margin-bottom: 20px ; width:$menu_witdh }
+
+nav{@include rect (1px,0px,0px,0px) ; width:$menu_witdh ; list-style: none;}
+
+nav > ul{padding : 0; margin:0;list-style-type: none;}
+
+
+a.actif, a.inactif{text-decoration: none; display : block; font-size: $h3_font ; padding : 7px 0px 7px 6px ; font-size: $h3_font ; }			
+a.actif:hover, .inactif:hover{background-color: $pale_orange;color: $brown;}
+a.actif{color: $brown;background-color: $white;}
+a.inactif{color : $white} 
+
+
+/***************************************** style for the top menu ****************************************/
+#top-menu>ul>li{display:block;}
+#top-menu>ul{display:inline-block;}
+
+//#top-menu {display:inline-block ; position: fixed; right: 50%;width: 100%;}
+
+/************************************** style for the aside block ***************************************/
+
+aside{@extend .ib ; width : $aside_width;}
+#headAside{ padding : 10px 0px 4px 0px ; @include rect(1px,0px,1px,0px) }
+.miniArticle{ border-bottom : 1px solid white; }
+a.linkAside{ font-size : $tiny_font ; color : $pale_blue ; text-decoration: none ; font-family: Georgia;}
+a.linkAside:hover{ text-decoration : underline ; }
+.miniArticle h3 { text-align : center; }
+
+/************************************** style for the footer block **************************************/
+footer{ color : $white ; display:block ; left: 0 ; right: 0 ; background-color : $brown_d ; width : inherit ; 
+		margin : auto ; margin-top : 20px ; } 
+
+.footerwrapper { margin: auto ; width: $total_min_width }
+
+.footer1 { @include ib() ; width:232.5px  ; text-align : center ; padding : 5px 0px ; }
+
+#reservationLink { color : $brown_d ; background-color : $pale_orange ; padding : 10px 0px ; margin : 20px 0px 10px 0px; }
+#reservationLink:hover { text-decoration : underline ; }
+#reservationLink a {color : $brown_d ; }
+#reservationLink a:hover { font-size : $h2_font ;}
+
+#nouvelleCounter { border : 1px solid white ; text-align : center ; Line-Height : 20px ; margin: 10px 0px ; padding: 5px 2px;}
+#nouvelleCounter :hover { background-color : $brown_d ; }
+#nouvelleCounter>a:hover { color : $white ; }

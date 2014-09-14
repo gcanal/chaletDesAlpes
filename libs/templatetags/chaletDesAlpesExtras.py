@@ -34,7 +34,16 @@ def cut(value, arg):
     """Removes all values of arg from the given string"""
     return value.replace(arg, '')
 	
-	
+@register.filter
+def isActiveInt(value,arg):
+	if value is None or arg is None or value == "" or arg == "":
+		return 'inactif';
+	value=int(value); arg=int(arg);
+	if value==arg:
+		return 'actif'
+	else:
+		return 'inactif'
+			
 @register.filter
 def isActive(value,arg):
 	if value==arg:
@@ -42,6 +51,7 @@ def isActive(value,arg):
 	else:
 		return 'inactif'
 		
+
 #returns the number of translated sections on a given page
 @register.filter
 def translatedSections(pageId):

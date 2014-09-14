@@ -1,0 +1,30 @@
+ 
+{% extends "blog/homeBlog.html"%}
+{# template blogForm #}
+{% load i18n %}
+{% load chaletDesAlpesExtras %}
+
+{% load static %}
+
+{% block contentMiddle %}                                 
+{% if displayForm %}
+	<form method="post" enctype="multipart/form-data" action=".">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<input type="submit" value={% trans "soumettre" %}/> 
+	</form>
+{% endif %}
+
+{% if confirmDeleteCategory %}
+<p> Vous allez supprimer la catégorie {{cat}} (ainsi que tout ses articles) </p>
+
+<p> Il y a actuellement {{n_articles}} articles  dans cette categorie</p>
+<form style="display:inline" action="{% url 'blog.views.deleteCategory' idCategory %}" >
+    <input type="submit" value="Confirmer">
+</form >
+<form style="display:inline" action="{% url 'blog.views.home'  %}" >
+    <input type="submit" value="Annuler">
+</form >
+{% endif %}
+
+{% endblock %}

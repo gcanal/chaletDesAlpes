@@ -151,8 +151,8 @@ class ContactForm(forms.Form):
 #        self.n2 = User.objects.make_random_password(length=1, allowed_chars='123456789');self.n22=int(self.n2);	"
 
  
-class NouvelleCounterForm(forms.Form):
-	counter=forms.IntegerField(required=True,label="nombre de nouvelles ",max_value= 100);
+class ArticleCounterForm(forms.Form):
+	counter=forms.IntegerField(required=True,label="nombre d'articles ",max_value= 100);
 	
 	
 

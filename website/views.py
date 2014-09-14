@@ -8,11 +8,11 @@ from datetime import datetime, date, timedelta
 from django.contrib.auth import login,logout,authenticate                                                                         
 from django.core.urlresolvers import reverse 
 from django.contrib.auth.decorators import permission_required
-from nouvelles.models import Nouvelle
-from website.models import Section, Profil, CalendarLockParams, LockedDate,LockedPeriod, Message,NouvelleCounter
-from nouvelles.forms import NouvelleForm
+from blog.models import Article
+from website.models import Section, Profil, CalendarLockParams, LockedDate,LockedPeriod, Message,ArticleCounter
+from blog.forms import ArticleForm
 from website.forms import SectionForm,SectionForm2, SectionTextForm, SectionImageForm, ConnexionForm, CalendarSetUpForm, ContactForm
-from website.forms import NouvelleCounterForm
+from website.forms import ArticleCounterForm
 from django.forms.formsets import formset_factory
 from django.shortcuts import render_to_response
 from django.core.mail import send_mail , BadHeaderError
@@ -32,13 +32,15 @@ def activate(request, lan,pageId):
 	translation.activate(lan);
 	return redirect(view_from_pageId(pageId))
 	
+	
 def render_from_pageId(request,pageIdAsked):
 	pageId=int(pageIdAsked)
-	nouvelleCounter, created = NouvelleCounter.objects.get_or_create(pageId=pageId,defaults={'counter': 3})
+	articleCounter, created = ArticleCounter.objects.get_or_create(pageId=pageId,defaults={'counter': 3})
 	sections=Section.objects.filter(pageId=pageIdAsked).order_by('position');
-	nouvellesSection=Nouvelle.objects.filter(nouvellePageId=pageIdAsked)
-	dernieresNouvelles=Nouvelle.objects.order_by('-date')[:nouvelleCounter.counter]# latest Nouvelle Objects limitated to "counter"
-	#nNouvelles=min(dernieresNouvelles.count(),counter);#number of news that will be displayed on the page	
+	#nouvellesSection=Nouvelle.objects.filter(nouvellePageId=pageIdAsked)
+	lastArticles=Article.objects.order_by('-date')[:articleCounter.counter]# latest Article Objects limitated to "counter"
+	nArticles=min(lastArticles.count(),articleCounter);#number of news that will be displayed on the page	
+	
 	
 	return render(request, pageIdToTemplate(pageIdAsked),locals(),context_instance=RequestContext(request))
 
@@ -74,24 +76,26 @@ def aProximite(request):
 	return render_from_pageId(request,6)
 def pourVenir(request):
 	return render_from_pageId(request,7)
-
-def nouvelleCounter(request,pageIdAsked):
+	
+	
+"""
+def articleCounter(request,pageIdAsked):
 	pageIdAsked=int(pageIdAsked);
-	NouvelleCounterDisplay=True;#for the template
+	ArticleCounterDisplay=True;#for the template
 	pageName=pageIdToString(pageIdAsked);
-	nouvelleCounter,info=NouvelleCounter.objects.get_or_create(pageId=pageIdAsked,defaults={'counter': 5})
+	articleCounter,info=ArticleCounter.objects.get_or_create(pageId=pageIdAsked,defaults={'counter': 5})
 	pageId=17;
 	if request.method=='POST':
-		form=NouvelleCounterForm(request.POST)
+		form=ArticleCounterForm(request.POST)
 		if form.is_valid():
 			counter=form.cleaned_data['counter'];
-			nouvelleCounter.counter=counter;
-			nouvelleCounter.save(update_fields=['counter'])
+			articleCounter.counter=counter;
+			articleCounter.save(update_fields=['counter'])
 			return redirect(view_from_pageId(pageIdAsked))
 	else:
-		form=NouvelleCounterForm(initial={'counter': nouvelleCounter.counter,},);
+		form=ArticleCounterForm(initial={'counter': articleCounter.counter,},);
 	return render(request, 'website/websiteFormTemplate.html',locals())
-	
+"""	
 
 def contact(request):
 	pageId=9;
@@ -109,10 +113,12 @@ def contact(request):
 	lockedDatesMartna=LockedDate.objects.filter(appartId=3);
 	success=False;# to inform the template
 	#the following has to be improved using a context-template
-	nouvelleCounter, created = NouvelleCounter.objects.get_or_create(pageId=pageId,defaults={'counter': 3})
+	#TODO last articles
+	articleCounter, created = ArticleCounter.objects.get_or_create(pageId=pageId,defaults={'counter': 3})
 	sections=Section.objects.filter(pageId=pageId).order_by('position');
-	nouvellesSection=Nouvelle.objects.filter(nouvellePageId=pageId)
-	dernieresNouvelles=Nouvelle.objects.order_by('-date')[:nouvelleCounter.counter]# latest Nouvelle Objects limitated to "counter"
+	#nouvellesSection=Nouvelle.objects.filter(nouvellePageId=pageId)
+	lastArticles=Article.objects.order_by('-date')[:articleCounter.articleCounter]# latest Article Objects limitated to "counter"
+	
 	form = ContactForm(request.POST or None, request.FILES or None)
 	if request.method == 'POST': # If the form has been submitted...
 		if form.is_valid(): # All validation rules pass
@@ -192,7 +198,7 @@ def contact(request):
 @permission_required("perms.website.add_section")
 def creationSection(request,lan):
 	#creation of a section 
-	dernieresNouvelles=Nouvelle.objects.order_by('-date')
+	#lastArticles=Article.objects.order_by('-date')
 	pageId=10;
 	if request.method=='POST':
 		form=SectionForm(request.POST,request.FILES)
@@ -218,7 +224,7 @@ def creationSection(request,lan):
 @permission_required("perms.website.add_section")
 def creationSectionId(request,pageIdAsked,positionAsked):
 	#creation of a section knowing the page  Id
-	dernieresNouvelles=Nouvelle.objects.order_by('-date')
+	#lastArticles=Article.objects.order_by('-date')
 	pageId=11;	
 	positionAsked=int(positionAsked)
 	if request.method=='POST':
@@ -299,25 +305,27 @@ def modifySectionImage(request,pageIdAsked,positionAsked):
 		return render(request,'website/websiteFormTemplate.html',locals())
 
 def reservations(request):
+	#TODO  improve JS
 	#here the use of simplejson might be needed : from django.utils import simplejson ; blajs=simplejson.dumps(blapy);
 	ip= (u"Votre IP est %s") % request.META['REMOTE_ADDR'];
 	pageId=8;
 	lastDateDjanEGlyamo=datetime.today();
 	lastDateMartna=datetime.today();
 	try:
-		lockParamsDjanEGlyamo=CalendarLockParams.objects.get(appartId=1)#get return an object
+		lockParamsDjanEGlyamo=CalendarLockParams.objects.get(appartId=1)#get returns an object
 		lastDateDjanEGlyamo=lockParamsDjanEGlyamo.lastDate;
-		lockParamsMartna=CalendarLockParams.objects.get(appartId=3)#get return an object
+		lockParamsMartna=CalendarLockParams.objects.get(appartId=3)#get returns an object
 		lastDateMartna=lockParamsMartna.lastDate;
 	except Exception:
 		lastDateDjanEGlyamo=datetime.today();
 	lockedDatesDjanEGlyamo=LockedDate.objects.filter(appartId=1);
 	lockedDatesMartna=LockedDate.objects.filter(appartId=3);
 	
-	nouvelleCounter, created = NouvelleCounter.objects.get_or_create(pageId=pageId,defaults={'counter': 3})
+	articleCounter, created = ArticleCounter.objects.get_or_create(pageId=pageId,defaults={'counter': 3})
 	sections=Section.objects.filter(pageId=pageId).order_by('position');
-	nouvellesSection=Nouvelle.objects.filter(nouvellePageId=pageId)
-	dernieresNouvelles=Nouvelle.objects.order_by('-date')[:nouvelleCounter.counter]# latest Nouvelle Objects limitated to "counter"
+	#nouvellesSection=Nouvelle.objects.filter(nouvellePageId=pageId)
+	#blog articles are no longer displayed on the bottom of the page
+	lastArticles=Article.objects.order_by('-date')[:articleCounter.counter]# latest Article Objects limitated to "counter"
 	return render(request, 'website/reservations.html' ,locals())
 
 @permission_required("perms.website.add_lockedDate",)

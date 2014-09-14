@@ -18,7 +18,6 @@ urlpatterns = patterns('website.views',
     url(r'^deleteSection/(\d+)/(\d+)/$','deleteSection'),
     url(r'^modifySectionText/(\d+)/(\d+)/(\S+)/$','modifySectionText'),
     url(r'^modifySectionImage/(\d+)/(\d+)/$','modifySectionImage'),
-    url(r'^nouvelleCounter/(\d+)/$','nouvelleCounter'),
     url(r'^calendrier/(\d+)/$','calendrier'),
     url(r'^connexion/$','connexion'),
     url(r'^deconnexion/$', 'deconnexion'),
@@ -26,3 +25,4 @@ urlpatterns = patterns('website.views',
 )
 
 #url(r'^creationNouvelle/$', NouvelleWizard.as_view([EnTeteForm, SectionsSupplementaireForm])),
+#url(r'^nouvelleCounter/(\d+)/$','nouvelleCounter'),
