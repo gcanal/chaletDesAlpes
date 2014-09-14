@@ -117,7 +117,7 @@ def contact(request):
 	articleCounter, created = ArticleCounter.objects.get_or_create(pageId=pageId,defaults={'counter': 3})
 	sections=Section.objects.filter(pageId=pageId).order_by('position');
 	#nouvellesSection=Nouvelle.objects.filter(nouvellePageId=pageId)
-	lastArticles=Article.objects.order_by('-date')[:articleCounter.articleCounter]# latest Article Objects limitated to "counter"
+	lastArticles=Article.objects.order_by('-date')[:articleCounter.counter]# latest Article Objects limitated to "counter"
 	
 	form = ContactForm(request.POST or None, request.FILES or None)
 	if request.method == 'POST': # If the form has been submitted...
