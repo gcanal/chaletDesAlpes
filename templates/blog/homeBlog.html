@@ -11,9 +11,10 @@
 <li ><a class={{idCategoryAsked|isActiveInt:category.id}} href="{% url 'blog.views.page' category.id %}"> {{category.title}} </a></li>
 
 {% endfor %}
-
+{% if perms.website.add_section %}
 <li ><a class={{addCategory|isActiveInt:1}} href="{% url 'blog.views.addCategory' %}"> Ajouter categorie</a></li>
 <li ><a class={{addArticle|isActiveInt:1}} href="{% url 'blog.views.addArticle' %}"> Ajouter un article de blog</a> </li>
+{% endif %}
 {% endblock %}
 
 {% block articles %}                                      
@@ -21,7 +22,7 @@
 
 
 {% if category != None %}
-{% if perms.blog.delete_category %}
+{% if perms.website.delete_section %}
 <form style="display:inline" action="{% url 'blog.views.deleteCategoryWithConfirmation' category.id  %}" >
     <input type="submit" value="Supprimer la categorie : {{category}}">
 </form >
